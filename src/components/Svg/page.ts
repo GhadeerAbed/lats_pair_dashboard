@@ -1,0 +1,6 @@
+export * from './DashSvg/page'
+export * from './CategorySvg/page'
+export * from './CustomerSvg/page'
+export * from './OrderSvg/page'
+export * from './PackageSvg/page'
+export * from './PaymentSvg/page'

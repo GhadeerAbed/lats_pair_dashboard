@@ -1,0 +1,45 @@
+export type TableProps = {
+  OrderID?:string,
+  Customer?:string,
+  Package?:string,
+  OrderDate?:string,
+  OrderStatus?:string,
+  PaymentMethod?:string,
+  Amount?:string,
+  action?:string,
+  Status?:string,
+  NameAR?:string,
+  NameEN:string,
+  Image?:any,
+  PaymentDate?:string,
+  OrderSubStatus?:string
+  sessionPeriod?:string
+  timeSlot?:string
+  PackageStatus?:string
+  Category?:string
+  PackageType?:string
+  Email?:string
+  Phone?:string
+  PackageNameEN?:string
+  PackageNameAR?:string
+  Pakage?:string
+
+  Name?:string,
+  SKU?:string,
+  mainCategory?:string,
+  subCategory?:string,
+  Price?:string,
+  Quantity?:string,
+  tagsNames?:string
+  brandName?:string
+  Product?:string
+  Code?:string
+  TypeOffer?:string
+  Value?:string
+  CreatedAt?:string
+  EndAt?:string
+  OrderNumber?:string
+  OrderAddress?:string
+  Products?:string
+
+};

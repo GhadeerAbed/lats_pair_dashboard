@@ -1,0 +1,5 @@
+export * from './LeftLogin/page'
+export * from './ForgetPass/page'
+export * from './NewPass/page'
+export * from './OtpPass/page'
+export * from './LeftRegister/page'
