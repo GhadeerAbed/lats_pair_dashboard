@@ -5,7 +5,6 @@ export * from "./Auth/OtpPassword";
 export * from "./Dashboard/page";
 export * from "./Dashboard/profile";
 export * from "./Products/page";
-export * from "./Reports/page";
 export * from "./Payment/page";
 export * from "./Payment/PaymentParent";
 export * from "./Offers/OfferList";

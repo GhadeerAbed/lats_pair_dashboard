@@ -2,7 +2,6 @@
 import { Button } from "@/components/page";
 import React, { useState } from "react";
 import TableList from "./TableList";
-import { useTranslations } from "next-intl";
 import { AddProduct } from "./components/page";
 import AddForm from "./components/AddForm/page";
 
@@ -17,20 +16,20 @@ export const Products = () => {
   const handleCancelClick = () => {
     setShowAddForm(false);
   };
-  const t = useTranslations();
+  
   return (
     <div>
       {!showAddForm ? (
         <div className="lg:w-[1000px] w-[600px]">
           <div className="bg-white  p-3 rounded-md flex justify-between items-center ">
-            <p className="font-semibold  text-lg">{t("sidebar.products")} </p>
+            <p className="font-semibold  text-lg">{("sidebar.products")} </p>
             <Button
               buttonSize="small"
               className="bg-primary text-white "
               type="button"
               onClick={handleAddClick}
             >
-              {t("add")}
+              {("add")}
             </Button>
           </div>
           <TableList />
@@ -39,7 +38,7 @@ export const Products = () => {
         <div className="flex flex-col xl:w-[1100px] lg:w-[900px] w-[600px]">
           <div className="bg-white  p-3 rounded-md flex items-center  mb-3  ">
             <p className="font-semibold  text-lg">
-              {t("sidebar.products")} {`>`} {t("add")}
+              {("sidebar.products")} {`>`} {("add")}
             </p>
           </div>
           <AddForm />

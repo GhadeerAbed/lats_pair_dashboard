@@ -3,7 +3,6 @@ import { Button, Input, Select } from "@/components/page";
 import { API_SERVICES_URLS } from "@/data/page";
 import { useSWRHook, useSWRMutationHook } from "@/hooks/page";
 import { DeleteIcon } from "@/lib/@heroicons/page";
-import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 import { useForm, useFieldArray, useWatch } from "react-hook-form";
 import { FileUpload } from "../page";
@@ -38,7 +37,7 @@ export const AddProduct = ({setProductId ,setStepData ,onNext , productId} : {se
     "POST"
   );
 
-  const t = useTranslations();
+
 
   const { data } = useSWRHook(API_SERVICES_URLS.GET_MAIN_CATEGORY);
   const selectedMainCategoryId = useWatch({

@@ -7,7 +7,7 @@ import EditCustomerProfile from "../EditCustomerProfile/page";
 import { BigModal, ConfirmModal } from "@/components/page";
 import { API_SERVICES_URLS } from "@/data/page";
 import { useSWRMutationHook } from "@/hooks/page";
-import { useTranslations } from "next-intl";
+
 
 export const OfferTable: React.FC<{
   leadResponseData: any;
@@ -27,7 +27,7 @@ export const OfferTable: React.FC<{
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState<any>(null);
   const [customerIdToDelete, setCustomerIdToDelete] = useState<string | null>(null);
-  const t = useTranslations()
+
 
   // Define the table columns
   const fixedColumns: Column<TableProps>[] = [
@@ -157,8 +157,8 @@ export const OfferTable: React.FC<{
 
       <BigModal isOpen={isDeleteModalOpen} closeModal={closeDeleteModal}>
       <ConfirmModal
-          title={t("title")}
-          message={t("message1")}
+          title={("title")}
+          message={("message1")}
           onConfirm={confirmDelete}
           onCancel={() => setIsModalOpen(false)}
         />

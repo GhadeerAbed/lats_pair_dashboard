@@ -2,7 +2,6 @@
 import { Button, Input } from "@/components/page";
 import { API_SERVICES_URLS } from "@/data/page";
 import { useSWRMutationHook } from "@/hooks/page";
-import { useTranslations } from "next-intl";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -14,7 +13,7 @@ const ProfileSecurity = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const t = useTranslations();
+
   const { customTrigger: editPassword } = useSWRMutationHook(
     API_SERVICES_URLS.EDIT_CURRENT_PASS,
     "PATCH"
@@ -53,26 +52,26 @@ const ProfileSecurity = () => {
     <div className="font-sans">
       <h1 className="font-bold text-lg">{t("change_password")}</h1>
       <p className="w-[400px] font-md py-5 text-sm">
-      {t("password_form")}
+      {("password_form")}
       </p>
       <form className="w-full max-w-[400px]" onSubmit={handleSubmit(onSubmit)}>
         <Input
           type="password"
-          label={t("Current_password")}
+          label={("Current_password")}
           id="currentPassword"
           className="mb-5"
           {...register("currentPassword")}
         />
         <Input
           type="password"
-          label={t("New_password")}
+          label={("New_password")}
           id="newPassword"
           className="mb-5"
           {...register("newPassword")}
         />
         <Input
           type="password"
-          label={t("Confirm_new_password")}
+          label={("Confirm_new_password")}
           id="confirmPassword"
           className="mb-5"
           {...register("confirmPassword")}
@@ -84,13 +83,13 @@ const ProfileSecurity = () => {
             buttonLoadingProps={{ loadingText: "Changing Password..." }}
             loading={isSubmitting}
           >
-            {t("change_password")}
+            {("change_password")}
           </Button>
           <Button
             className="bg-white text-primary border-primary uppercase w-full mt-8"
             type="button"
           >
-            {t("cancel")}
+            {("cancel")}
           </Button>
         </div>
       </form>

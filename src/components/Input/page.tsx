@@ -40,7 +40,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         }`,
         icon: "absolute text-gray-400 select-none top-1/2 -translate-y-2/4",
         startIcon: `left-4 ${startIconClassName ?? ""}`,
-        endIcon: `rtl:left-4 ltr:right-4 ${endIconClassName ?? ""}`,
+        endIcon: `right-4 ${endIconClassName ?? ""}`,
         input: `block w-full border-borderColor focus:ring-black text-sm focus:border-black rounded-lg ${
           inputClassName || ""
         } ${disabled ? "bg-secondary" : ""}`,

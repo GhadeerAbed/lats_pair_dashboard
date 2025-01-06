@@ -3,12 +3,12 @@
 import { Button, Input } from "@/components/page";
 import { API_SERVICES_URLS } from "@/data/page";
 import { useSWRHook, useSWRMutationHook } from "@/hooks/page";
-import { useTranslations } from "next-intl";
+
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const ProfileDetails = () => {
-  const t = useTranslations();
+
   const { data, isLoading, error } = useSWRHook(
     API_SERVICES_URLS.GET_ADMAN_PROFILE
   );
@@ -46,7 +46,7 @@ const ProfileDetails = () => {
     }
   }, [data, setValue]);
 
-  const onSubmit = async (formData) => {
+  const onSubmit = async (formData:any) => {
     setServerError(null);
     const payload = {
       email: formData.email,
@@ -85,8 +85,8 @@ const ProfileDetails = () => {
 
   return (
     <div className="font-sans pb-10">
-      <h1 className="font-bold text-lg">{t("Profile_Details")}</h1>
-      <p className="w-[400px] font-md py-5 text-sm">{t("profile_form")}</p>
+      <h1 className="font-bold text-lg">{("Profile_Details")}</h1>
+      <p className="w-[400px] font-md py-5 text-sm">{("profile_form")}</p>
       <form className="w-full max-w-[400px]" onSubmit={handleSubmit(onSubmit)}>
         {serverError && (
           <p className="text-red-500 text-sm mb-4">{serverError}</p>
@@ -94,7 +94,7 @@ const ProfileDetails = () => {
 
         <Input
           type="email"
-          label={t("email_address")}
+          label={("email_address")}
           id="email"
           className="mb-5"
           {...register("email", {
@@ -108,13 +108,13 @@ const ProfileDetails = () => {
 
         <Input
           type="text"
-          label={t("phoneNumber")}
+          label={("phoneNumber")}
           id="phoneNumber"
           className="mb-5"
           {...register("phoneNumber")}
         />
         <div className="flex flex-col">
-          <label htmlFor="description">{t("description")}</label>
+          <label htmlFor="description">{("description")}</label>
           <textarea
             id="description"
             className="mb-5 py-5 mt-2 rounded-lg"
@@ -123,7 +123,7 @@ const ProfileDetails = () => {
         </div>
 
         <div className="mb-5">
-          <label>{t("logo")}</label>
+          <label>{("logo")}</label>
           <div className="relative">
             <input
               type="file"
@@ -145,7 +145,7 @@ const ProfileDetails = () => {
         </div>
 
         <div className="mb-5">
-          <label>{t("coverImage")}</label>
+          <label>{("coverImage")}</label>
           <div className="relative">
             <input
               type="file"

@@ -1,11 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import { Button } from "@headlessui/react";
-import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 const SuccessRegister = () => {
-  const t = useTranslations();
-  const locale = useLocale();
+
   return (
     <div className="flex flex-col items-center justify-center mt-10">
       <Image
@@ -20,7 +18,7 @@ const SuccessRegister = () => {
         className="bg-primary text-white uppercase  mt-10 px-10 py-3 rounded-md "
         type="button"  
       >
-        <Link href={`/${locale}/login`}>{t("login_button")}</Link>
+        <Link href={`/login`}>{"login_button"}</Link>
       </Button>
     </div>
   );

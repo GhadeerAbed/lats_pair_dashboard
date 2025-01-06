@@ -1,5 +1,5 @@
 export const API_SERVICES_URLS = {
-  LOGIN: "/vendor/auth/login",
+  LOGIN: "/auth/login",
   SIGNUP: "/vendor/auth/signup",
   FORGET_PASSWORD: "/vendor/auth/check-email-send-code",
   VERIFY_CODE: "/vendor/auth/check-verification-code",

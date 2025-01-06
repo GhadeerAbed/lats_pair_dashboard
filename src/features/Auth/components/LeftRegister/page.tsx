@@ -7,11 +7,9 @@ import { getFieldHelperText } from "../../../../utils/page";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "../../../../lib/axios/page";
-import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 
 export const LeftRegister = () => {
-  const locale = useLocale();
   const {
     register,
     handleSubmit,
@@ -20,7 +18,6 @@ export const LeftRegister = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { setIsAuthenticated, updateUserData } = useAuth();
   const router = useRouter();
-  const t = useTranslations();
 
   const onSubmit = handleSubmit(async (data) => {
     try {
@@ -29,7 +26,7 @@ export const LeftRegister = () => {
         console.log("Login successful", response.data);
         updateUserData(response.data.data);
         setIsAuthenticated(true);
-        router.push(`/${locale}/register/success`);
+        router.push(`/register/success`);
       }
     } catch (error: any) {
       console.error("Login failed", error.response?.data || error.message);
@@ -39,12 +36,12 @@ export const LeftRegister = () => {
 
   return (
     <div className="font-Sans w-[400px] mr-20">
-      <form  onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
         <div className=" bg-white rounded-lg shadow-DivShadow py-10  px-10 ">
-          <p className="text-4xl font-bold pb-8">{t("register")}</p>
+          <p className="text-4xl font-bold pb-8">{"register"}</p>
           <Input
             type="text"
-            label={t("full_name")}
+            label={"full_name"}
             id="name"
             className="mb-5"
             {...register("name", FORM_VALIDATION.name)}
@@ -53,7 +50,7 @@ export const LeftRegister = () => {
           />
           <Input
             type="email"
-            label={t("email_address")}
+            label={"email_address"}
             id="email"
             className="mb-5"
             {...register("email", FORM_VALIDATION.email)}
@@ -62,7 +59,7 @@ export const LeftRegister = () => {
           />
           <Input
             type="password"
-            label={t("password")}
+            label={"password"}
             id="password"
             {...register("password", FORM_VALIDATION.password)}
             error={!!errors.password}
@@ -70,7 +67,7 @@ export const LeftRegister = () => {
           />
           <div className="flex justify-between items-center ">
             <div className="flex items-center text-darkSecondary text-[14px]">
-              <Checkbox /> <span className="px-2">{t("remember_me")}</span>
+              <Checkbox /> <span className="px-2">{"remember_me"}</span>
             </div>
           </div>
           <Button
@@ -79,11 +76,13 @@ export const LeftRegister = () => {
             buttonLoadingProps={{ loadingText: "Login In..." }}
             loading={isSubmitting}
           >
-            {t("login_button")}
+            {"login_button"}
           </Button>
           <p className="text-center pt-5 text-fontColor1">
-            {t("have_account1")}
-            <Link className="font-medium underline" href={`/${locale}/login`}>{t("register_now1")}</Link>
+            {"have_account1"}
+            <Link className="font-medium underline" href={`/login`}>
+              {"register_now1"}
+            </Link>
           </p>
           {errorMessage && (
             <div className="mt-5 text-sm text-red-500 text-center">

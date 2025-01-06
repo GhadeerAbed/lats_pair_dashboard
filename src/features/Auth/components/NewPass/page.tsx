@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { API_SERVICES_URLS, FORM_VALIDATION } from "@/data/page";
 import { useState } from "react";
 import { getFieldHelperText } from "@/utils/page";
-import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 
 export const NewPass = () => {
@@ -20,7 +19,6 @@ export const NewPass = () => {
     watch
   } = useForm();
   const router = useRouter(); 
-  const locale = useLocale();
 
 
 
@@ -28,7 +26,7 @@ export const NewPass = () => {
     API_SERVICES_URLS.RESET_PASSWORD,
     "POST"
   );
-  const t = useTranslations();
+
   const adminId = localStorage.getItem("adminId");
 
   const onSubmit = handleSubmit(async (data) => {
@@ -53,7 +51,7 @@ export const NewPass = () => {
       if (response?.status === "success") {
         console.log("Password has been reset successfully");
         updateUserData(response.data.data);
-        router.push((`/${locale}/login`));
+        router.push((`/login`));
         
       } else {
         setErrorMessage("Failed to reset password");
@@ -67,13 +65,13 @@ export const NewPass = () => {
     <div className="font-Sans max-w-[400px] mr-20">
       <form  onSubmit={onSubmit}>
         <div className=" rounded-lg shadow-DivShadow py-16 px-10 ">
-          <p className="text-3xl font-bold pb-6">{t("new_password")}</p>
-          <p className="pb-8 font-medium">{t("new_password_sentence")}</p>
+          <p className="text-3xl font-bold pb-6">{"new_password"}</p>
+          <p className="pb-8 font-medium">{"new_password_sentence"}</p>
 
           {/* New Password Input */}
           <Input
             type="password"
-            label={t("new_password")}
+            label={"new_password"}
             id="newPassword"
             {...register("newPassword", FORM_VALIDATION.newPassword)}
             error={!!errors.newPassword}
@@ -83,7 +81,7 @@ export const NewPass = () => {
           {/* Confirm New Password Input */}
           <Input
             type="password"
-            label={t("confirm_new_password")}
+            label={"confirm_new_password"}
             id="passwordConfirm"
             {...register("passwordConfirm", {
               ...FORM_VALIDATION.passwordConfirm,
@@ -101,7 +99,7 @@ export const NewPass = () => {
             buttonLoadingProps={{ loadingText: "Resetting Password..." }}
             loading={isSubmitting}
           >
-            {t("confirm_button")}
+            {"confirm_button"}
           </Button>
 
           {/* Error Message */}

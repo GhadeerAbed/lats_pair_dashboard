@@ -12,7 +12,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#000A51",
+        primary: "#0D92F4",
         darkPrimary: "#1D6A63",
         fontColor1: "#2C2C2C",
         fontColor2: "#727272",

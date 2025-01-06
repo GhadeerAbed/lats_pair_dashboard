@@ -6,9 +6,9 @@ import { getFieldHelperText } from "@/utils/page";
 import { useSWRMutationHook } from "@/hooks/page";
 import { useState } from "react";
 import { useRouter } from "next/navigation"; 
-import { useLocale, useTranslations } from "next-intl";
+
 export const ForgetPass = () => {
-  const t = useTranslations();
+
   const {
     register,
     handleSubmit,
@@ -18,7 +18,6 @@ export const ForgetPass = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const router = useRouter(); 
-  const locale = useLocale();
 
   const { customTrigger: sendToEmail } = useSWRMutationHook(
     API_SERVICES_URLS.FORGET_PASSWORD,
@@ -40,12 +39,12 @@ export const ForgetPass = () => {
         setSuccessMessage(response.data.message);
         localStorage.setItem("adminId", adminId);
         localStorage.setItem("email", data.email);
-        router.replace(`/${locale}/login/verification`);
+        router.replace(`/login/verification`);
       } else {
-        setErrorMessage(t("email_send_error")); // Handle specific error if needed
+        setErrorMessage("email_send_error"); // Handle specific error if needed
       }
     } catch (error) {
-      setErrorMessage(t("email_send_error")); // Handle failure
+      setErrorMessage("email_send_error"); // Handle failure
     }
   };
 
@@ -53,11 +52,11 @@ export const ForgetPass = () => {
     <div className="font-Sans max-w-[400px] mr-20">
       <form  onSubmit={handleSubmit(onSubmit)}>
         <div className=" rounded-lg shadow-DivShadow py-24 px-10 ">
-          <p className="text-3xl font-bold pb-6">{t("forget_password")}</p>
-          <p className="pb-8 font-medium">{t("password_sentence")}</p>
+          <p className="text-3xl font-bold pb-6">{"forget_password"}</p>
+          <p className="pb-8 font-medium">{"password_sentence"}</p>
           <Input
             type="email"
-            label={t("email_address")}
+            label={"email_address"}
             id="email"
             className="mb-5"
             {...register("email", FORM_VALIDATION.email)}
@@ -70,7 +69,7 @@ export const ForgetPass = () => {
             buttonLoadingProps={{ loadingText: "Sending Email..." }}
             loading={isSubmitting}
           >
-            {t("next_button")}
+            {"next_button"}
           </Button>
 
           {/* Display error or success messages */}

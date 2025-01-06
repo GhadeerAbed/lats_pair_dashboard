@@ -2,13 +2,12 @@
 import { Button, Input, Search, Select } from "@/components/page";
 import { API_SERVICES_URLS } from "@/data/page";
 import { useSWRHook, useSWRMutationHook } from "@/hooks/page";
-import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 export const OfferForm = () => {
-  const locale = useLocale();
+
   const {
     register,
     handleSubmit,
@@ -42,7 +41,7 @@ export const OfferForm = () => {
     setSearchTerm(term);
   };
 
-  const t = useTranslations();
+
 
   const onSubmit = handleSubmit(async (formData) => {
     try {
@@ -63,7 +62,7 @@ export const OfferForm = () => {
 
       await customTrigger(payload);
     } catch (error) {
-      setErrorMessage(t("error_message"));
+      setErrorMessage(("error_message"));
     }
   });
 
@@ -88,39 +87,39 @@ export const OfferForm = () => {
 
   return (
     <div className="font-Sans bg-white p-5">
-      <h1 className="font-semibold text-lg ">{t("add_offer")}</h1>
-      <p className="py-4 text-sm">{t("offer_form")}</p>
+      <h1 className="font-semibold text-lg ">{("add_offer")}</h1>
+      <p className="py-4 text-sm">{("offer_form")}</p>
       <form onSubmit={onSubmit} className="w-[500px]">
         <div className="grid sm:grid-cols-2 grid-cols-1 gap-4">
           <Input
             type="text"
-            label={t("offer_name_ar")}
+            label={("offer_name_ar")}
             id="name"
             className="mb-5"
             {...register("name.ar")}
           />
           <Input
             type="text"
-            label={t("offer_name_en")}
+            label={("offer_name_en")}
             id="name"
             className="mb-5"
             {...register("name.en")}
           />
         </div>
-        <p>{t("offer_products")}</p>
+        <p>{("offer_products")}</p>
         <Search setSearch={handleSearchSubmit} />
         {data?.data?.map((product: any) => (
           <li key={product._id}>{product._id}</li>
         ))}
         <div className="relative mt-5 mb-5">
           <Link
-            href={`/${locale}/dashboard/coupon`}
+            href={`/dashboard/coupon`}
             className="text-primary text-sm font-medium underline absolute left-0 cursor-pointer "
           >
-            {t("create_random_code")}
+            {("create_random_code")}
           </Link>
           <div className="flex flex-col">
-            <label htmlFor="offerCode text-sm">{t("offer_code")}</label>
+            <label htmlFor="offerCode text-sm">{("offer_code")}</label>
             <input
               type="text"
               id="offerCode"
@@ -131,26 +130,26 @@ export const OfferForm = () => {
         </div>
         <Input
           type="text"
-          label={t("offer_value")}
+          label={("offer_value")}
           id="offerValue"
           {...register("discountValue")}
         />
         <Select
           options={options}
-          label={t("offer_type")}
+          label={("offer_type")}
           id="offerType"
           {...register("typeOffer")}
         />
         <div className="grid sm:grid-cols-2 grid-cols-1 gap-4 mt-5">
           <Input
             type="date"
-            label={t("offer_start")}
+            label={("offer_start")}
             id="offerStart"
             {...register("startOfferDate")}
           />
           <Input
             type="date"
-            label={t("offer_end")}
+            label={("offer_end")}
             id="offerEnd"
             {...register("endOfferDate")}
           />
@@ -162,13 +161,13 @@ export const OfferForm = () => {
             buttonLoadingProps={{ loadingText: "saving..." }}
             loading={isSubmitting}
           >
-            {t("save_offer")}
+            {("save_offer")}
           </Button>
           <Button
             className="bg-white text-primary uppercase w-full mt-10"
             type="button"
           >
-            {t("cancel")}
+            {("cancel")}
           </Button>
         </div>
         {errorMessage && (

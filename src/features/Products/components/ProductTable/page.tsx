@@ -6,7 +6,7 @@ import { Table } from "@/features/Order/components/page";
 import { useSWRMutationHook } from "@/hooks/page";
 import { API_SERVICES_URLS } from "@/data/page";
 import { BigModal, ConfirmModal } from "@/components/page";
-import { useTranslations } from "next-intl";
+
 
 export const ProductTable: React.FC<{
   leadResponseData: any;
@@ -21,7 +21,7 @@ export const ProductTable: React.FC<{
   const [productToDelete, setProductToDelete] = useState<string | null>(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [productToEdit, setProductToEdit] = useState<TableProps | null>(null);
-  const t = useTranslations();
+
 
   // Update and delete hooks
   const { customTrigger: deleteTrigger } = useSWRMutationHook(
@@ -183,8 +183,8 @@ export const ProductTable: React.FC<{
       {/* Confirmation Modal */}
       <BigModal isOpen={isModalOpen} closeModal={() => setIsModalOpen(false)}>
         <ConfirmModal
-          title={t("title")}
-          message={t("message")}
+          title={("title")}
+          message={("message")}
           onConfirm={confirmDelete}
           onCancel={() => setIsModalOpen(false)}
         />

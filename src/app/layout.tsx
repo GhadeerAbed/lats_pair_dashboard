@@ -28,7 +28,6 @@ export default async function LocaleLayout({
           offset={5}
         />
           <AuthProvider>
-            <Navbar />
             {children}
           </AuthProvider>
       </body>

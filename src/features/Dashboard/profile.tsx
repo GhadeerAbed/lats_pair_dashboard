@@ -4,11 +4,10 @@ import ProfileDetails from "./components/ProfileDetails/page";
 import ProfileSecurity from "./components/ProfileSecurity/page";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { cn } from "../../utils/page";
-import { useTranslations } from "next-intl";
+
 
 export const Profile = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const t = useTranslations()
   return (
     <div className="w-full">
       <TabGroup selectedIndex={selectedIndex} onChange={setSelectedIndex}>
@@ -27,7 +26,7 @@ export const Profile = () => {
               )
             }
           >
-            {t("Profile_Details")}
+            {("Profile_Details")}
           </Tab>
 
           <Tab
@@ -40,7 +39,7 @@ export const Profile = () => {
               )
             }
           >
-            {t("Security")}
+            {("Security")}
           </Tab>
         </TabList>
         <TabPanels
