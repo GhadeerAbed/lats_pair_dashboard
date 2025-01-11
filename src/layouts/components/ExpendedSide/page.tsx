@@ -12,6 +12,7 @@ import {
   OrderSvg,
   PackageSvg,
   PaymentSvg,
+  SettingSvg,
 } from "@/components/page";
 
 interface ExpendedSideProps {}
@@ -29,31 +30,38 @@ export const ExpendedSide: FC<ExpendedSideProps> = ({}) => {
   return (
     <ul className="font-Sans  flex flex-col justify-center space-y-4 text-black px-2 whitespace-nowrap">
       <ExpendedSideList
-        title="products"
+        title="Dashboard"
         icon={<DashSvg />}
-        href={`/${URL_PATHS.DASHBOARD.PAGE}`}
-        isActive={isActive(`/${URL_PATHS.DASHBOARD.PAGE}`, [])}
+        href={`/dashboard`}
+        isActive={isActive(`/dashboard`, [])}
       />
 
       <ExpendedSideList
-        title={"offers"}
+        title={"Appointments"}
         icon={<CategorySvg />}
-        href={`/${URL_PATHS.DASHBOARD.OFFERS}`}
-        isActive={isActive(`/${URL_PATHS.DASHBOARD.OFFERS}`, [])}
+        href={`/dashboard/appointments`}
+        isActive={isActive(`/dashboard/appointments`, [])}
       />
 
       <ExpendedSideList
-        title={"reports"}
+        title={"Users"}
         icon={<PackageSvg />}
-        href={`/${URL_PATHS.DASHBOARD.REPORTS}`}
-        isActive={isActive(`/${URL_PATHS.DASHBOARD.REPORTS}`, [])}
+        href={`/dashboard/users`}
+        isActive={isActive(`/dashboard/users`, [])}
       />
 
       <ExpendedSideList
-        title={"sidebar.orders"}
+        title={"Blogs"}
         icon={<OrderSvg />}
-        href={`/${URL_PATHS.DASHBOARD.ORDER}`}
-        isActive={isActive(`/${URL_PATHS.DASHBOARD.ORDER}`, [])}
+        href={`/dashboard/blogs`}
+        isActive={isActive(`/dashboard/blogs`, [])}
+      />
+      
+      <ExpendedSideList
+        title={"Setting"}
+        icon={<SettingSvg />}
+        href={`/dashboard/setting`}
+        isActive={isActive(`/dashboard/setting`, [])}
       />
     </ul>
   );

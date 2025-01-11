@@ -1,14 +1,12 @@
 
-
-
 export const URL_PATHS = {
   HOME: "/",
   DASHBOARD: {
     PAGE: "/dashboard",
-    REPORTS: "/dashboard/reports",
-    OFFERS: "/dashboard/offers",
-    PAYMENT: "/dashboard/payment",
-    ORDER: "/dashboard/order",
+    APPOINTMENTS: "/dashboard/appointments",
+    USERS: "/dashboard/users",
+    BLOGS: "/dashboard/blogs",
+    SETTING: "/dashboard/setting",
 
   },
 } as const;

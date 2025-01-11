@@ -3,16 +3,84 @@ import React from "react";
 export const CategorySvg = (props: any) => {
   return (
     <svg
-      width="17"
-      height="16"
-      viewBox="0 0 17 16"
-      fill="currentColor"
+      width="24"
+      height="25"
+      viewBox="0 0 24 25"
+      fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <path
-        d="M7.5625 1.4375V5.8125C7.5625 6.14402 7.4308 6.46196 7.19638 6.69638C6.96196 6.9308 6.64402 7.0625 6.3125 7.0625H1.9375C1.60598 7.0625 1.28804 6.9308 1.05362 6.69638C0.819196 6.46196 0.6875 6.14402 0.6875 5.8125V1.4375C0.6875 1.10598 0.819196 0.788037 1.05362 0.553616C1.28804 0.319196 1.60598 0.1875 1.9375 0.1875H6.3125C6.64402 0.1875 6.96196 0.319196 7.19638 0.553616C7.4308 0.788037 7.5625 1.10598 7.5625 1.4375ZM15.0625 0.1875H10.6875C10.356 0.1875 10.038 0.319196 9.80362 0.553616C9.5692 0.788037 9.4375 1.10598 9.4375 1.4375V5.8125C9.4375 6.14402 9.5692 6.46196 9.80362 6.69638C10.038 6.9308 10.356 7.0625 10.6875 7.0625H15.0625C15.394 7.0625 15.712 6.9308 15.9464 6.69638C16.1808 6.46196 16.3125 6.14402 16.3125 5.8125V1.4375C16.3125 1.10598 16.1808 0.788037 15.9464 0.553616C15.712 0.319196 15.394 0.1875 15.0625 0.1875ZM6.3125 8.9375H1.9375C1.60598 8.9375 1.28804 9.0692 1.05362 9.30362C0.819196 9.53804 0.6875 9.85598 0.6875 10.1875V14.5625C0.6875 14.894 0.819196 15.212 1.05362 15.4464C1.28804 15.6808 1.60598 15.8125 1.9375 15.8125H6.3125C6.64402 15.8125 6.96196 15.6808 7.19638 15.4464C7.4308 15.212 7.5625 14.894 7.5625 14.5625V10.1875C7.5625 9.85598 7.4308 9.53804 7.19638 9.30362C6.96196 9.0692 6.64402 8.9375 6.3125 8.9375ZM12.875 8.9375C12.1951 8.9375 11.5305 9.13911 10.9652 9.51682C10.3999 9.89454 9.95934 10.4314 9.69916 11.0595C9.43899 11.6876 9.37091 12.3788 9.50355 13.0456C9.63619 13.7124 9.96358 14.3249 10.4443 14.8057C10.9251 15.2864 11.5376 15.6138 12.2044 15.7464C12.8712 15.8791 13.5624 15.811 14.1905 15.5508C14.8186 15.2907 15.3555 14.8501 15.7332 14.2848C16.1109 13.7195 16.3125 13.0549 16.3125 12.375C16.3125 11.4633 15.9503 10.589 15.3057 9.94432C14.661 9.29966 13.7867 8.9375 12.875 8.9375Z"
-        fill="currentColor"
+        d="M3.09265 9.90445H20.9166"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M16.4421 13.8097H16.4514"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M12.0046 13.8097H12.0139"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M7.55787 13.8097H7.56714"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M16.4421 17.6964H16.4514"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M12.0046 17.6964H12.0139"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M7.55787 17.6964H7.56714"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M16.0437 2.5V5.79078"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M7.96552 2.5V5.79078"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M16.2383 4.0791H7.77096C4.83427 4.0791 3 5.71504 3 8.72213V17.7718C3 20.8261 4.83427 22.4999 7.77096 22.4999H16.229C19.175 22.4999 21 20.8545 21 17.8474V8.72213C21.0092 5.71504 19.1842 4.0791 16.2383 4.0791Z"
+        stroke="currentColor"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       />
     </svg>
   );

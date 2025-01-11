@@ -23,7 +23,6 @@ export const LeftLogin = () => {
     try {
       const response = await axios.post(API_SERVICES_URLS.LOGIN, data);
       if (response.status === 200) {
-        console.log("Login successful", response.data);
         updateUserData(response.data.data);
         setIsAuthenticated(true);
         router.push(`/dashboard`);

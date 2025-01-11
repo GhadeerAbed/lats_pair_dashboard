@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "../../utils/page";
 import { ExpendedSide } from "../components/page";
+import Image from 'next/image'
 
 export const SideBar = () => {
   // const pathname = usePathname();
@@ -9,10 +10,11 @@ export const SideBar = () => {
     <>
       <aside
         className={cn(
-          "w-[210px] bg-white  shadow-sideShadow border-l-2 transition-all duration-500 ease transform min-h-screen"
+          "w-[250px] bg-white  shadow-sideShadow border-l-2 transition-all duration-500 ease transform min-h-screen"
         )}
       >
-        <div className="mt-10">
+        <Image src='/logo.svg' width='200' height='200' alt='logo' className='mx-auto mt-5' />
+        <div className="mt-10 pl-3">
           <ExpendedSide />
         </div>
       </aside>

@@ -39,7 +39,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setIsAuthenticated(true);
 
       if (publicRoutes.includes(pathname)) {
-        router.replace(`}/dashboard`);
+        router.replace(`/dashboard`);
       }
     } else if (!publicRoutes.includes(pathname)) {
       router.replace(`/`);

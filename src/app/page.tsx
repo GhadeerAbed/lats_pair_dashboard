@@ -1,8 +1,7 @@
 "use client";
-import { Button } from "@/components/page";
+
 import { Login } from "@/features/page";
 import { getAuthData } from "@/utils/page";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 

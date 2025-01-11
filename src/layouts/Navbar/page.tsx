@@ -14,7 +14,7 @@ export const Navbar = () => {
     <>
       <div className="flex items-center justify-between px-20 border-b-2 py-3 shadow-NavShadow">
         <div>
-          <Image src={screens1} alt="logo" />
+          {/* <Image src={screens1} alt="logo" /> */}
         </div>
 
         <div className="flex items-center gap-4 text-black cursor-pointer rtl:ml-5">
