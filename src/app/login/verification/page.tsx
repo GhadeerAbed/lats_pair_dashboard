@@ -4,7 +4,7 @@ import React from "react";
 
 const VerificationPasswordPage = () => {
   return (
-    <div className='px-20'>
+    <div >
       <OtpPassword />
     </div>
   );

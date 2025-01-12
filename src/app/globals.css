@@ -15,29 +15,18 @@ body {
 /* Table.css */
 
 
-table {
+/* table {
   border-collapse: collapse;
  
-}
-thead{
-  background-color: #F9F9F9;
-}
-th:first-child{
-  background-color: #F9F9F9;
-}
-th:nth-child(2){
-  background-color: #F9F9F9;
-}
+} */
+
+
 th,
 td {
   padding: 15px 16px;
   text-align: left;
 }
-/* 
-th:first-child,
-td:first-child {
-  padding: 15px 0px 15px 20px;
-} */
+
 
 th {
   border-bottom: 1px solid #ddd;
@@ -68,7 +57,7 @@ th {
   content: "";
   -webkit-appearance: none;
   background-color: transparent;
-  border: 2px solid #BF534E;
+  border: 2px solid #0D92F4;
   height: 18px;
   width: 18px;
   display: inline-block;
@@ -91,7 +80,7 @@ th {
   left: 8px;
   width: 5px;
   height: 11px;
-  border: solid #BF534E;
+  border: solid #0D92F4;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
@@ -103,7 +92,7 @@ th {
 .checkbox {
   display: grid;
   font-size: 1rem;
-  color: #BF534E;
+  color: #0D92F4;
 }
 
 .checkbox__input {
@@ -140,7 +129,7 @@ th {
 }
 
 .checkbox__input input:checked + .checkbox__control {
-  border-color: #BF534E;
+  border-color: #0D92F4;
   background-color: white;
 }
 

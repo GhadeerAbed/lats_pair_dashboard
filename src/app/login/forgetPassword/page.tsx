@@ -4,7 +4,7 @@ import React from 'react'
 
 const ForgetPasswordPage = () => {
   return (
-    <div className='px-20'><ForgetPassword/></div>
+    <div ><ForgetPassword/></div>
   )
 }
 

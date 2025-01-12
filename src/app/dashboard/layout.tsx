@@ -14,10 +14,10 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className=" bg-gray-50">
+    <div className="bg-[#FAFCFE] ">
         <div className="flex gap-10">
           <SideBar />
-          <div className="mt-8 ">{children}</div>
+          <div className="mt-8 w-full max-w-5xl pr-4">{children}</div>
         </div>
     </div>
   );

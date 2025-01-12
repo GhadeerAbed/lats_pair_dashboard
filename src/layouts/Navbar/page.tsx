@@ -12,7 +12,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <div className="flex items-center justify-between px-20 border-b-2 py-3 shadow-NavShadow">
+      <div className="flex items-center justify-between  border-b-2 py-3 shadow-NavShadow">
         <div>
           {/* <Image src={screens1} alt="logo" /> */}
         </div>

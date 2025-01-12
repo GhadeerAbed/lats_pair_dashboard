@@ -3,7 +3,7 @@ import React, { useState, Suspense } from "react";
 import { toast } from "sonner";
 import { useSWRMutationHook } from "@/hooks/page";
 import { API_SERVICES_URLS } from "@/data/page";
-import AddCombination from "../AddCombination/page"; // Adjust the path as needed
+import AddCombination from "../UserPreferencesForm/page"; // Adjust the path as needed
 import { AddProduct } from "../page";
 
 const AddForm = () => {

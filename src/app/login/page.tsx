@@ -4,7 +4,7 @@ import React from 'react'
 
 const LoginPage = () => {
   return (
-    <div className='px-20'><Login/></div>
+    <div ><Login/></div>
   )
 }
 

@@ -1,30 +1,12 @@
 export type TableProps = {
-  OrderID?:string,
-  Customer?:string,
-  Package?:string,
-  OrderDate?:string,
-  OrderStatus?:string,
-  PaymentMethod?:string,
-  Amount?:string,
-  action?:string,
-  Status?:string,
-  NameAR?:string,
-  NameEN:string,
-  Image?:any,
-  PaymentDate?:string,
-  OrderSubStatus?:string
-  sessionPeriod?:string
-  timeSlot?:string
-  PackageStatus?:string
-  Category?:string
-  PackageType?:string
-  Email?:string
-  Phone?:string
-  PackageNameEN?:string
-  PackageNameAR?:string
-  Pakage?:string
 
+  ID?:string;
   Name?:string,
+  DateOfBirth?:string,
+  Email?:string,
+  Role?:string,
+  action?:string
+  
   SKU?:string,
   mainCategory?:string,
   subCategory?:string,

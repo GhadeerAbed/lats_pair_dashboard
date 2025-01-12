@@ -68,7 +68,7 @@ export const Table: React.FC<{
       ) : (
         <>
           <div className="z-0">
-            <div className="overflow-x-auto w-full max-w-5xl">
+            <div className="overflow-x-auto  ">
               <table {...getTableProps()} >
                 <thead>
                   {headerGroups.map((headerGroup) => (
@@ -101,7 +101,7 @@ export const Table: React.FC<{
                       <tr
                         {...row.getRowProps()}
                         key={row.id}
-                        className="border-b"
+                        
                       >
                         {row.cells.map((cell, i) => (
                           <td

@@ -16,8 +16,8 @@ export const API_SERVICES_URLS = {
   GET_SUB_CATEGORIES: (id: string) => `/category/subCategory/${id}`,
   GET_TAGS: `/tags`,
   GET_BRANDS: "/brand",
-  CREATE_PRODUCT: `/products`,
-  CREATE_COMBINATION: (id: string) =>`/products/combination/${id}`,
+  CREATE_USER: `/users`,
+  CREATE_USER_PREF: `/users-prefs`,
   UPDATE_PRODUCT: (id: string) => `/products/${id}`,
   CREATE_OFFERS: `/offers`,
   SEARCH_PRODUCTS: (productName: string) =>

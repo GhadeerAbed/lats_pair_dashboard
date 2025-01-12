@@ -1,10 +1,12 @@
 
-import { Reports } from '@/features/page'
+
+
+import { Users } from '@/features/page'
 import React from 'react'
 
 const page = () => {
   return (
-    <div><Reports/></div>
+    <div><Users/></div>
   )
 }
 

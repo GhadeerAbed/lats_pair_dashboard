@@ -28,7 +28,7 @@ export default async function LocaleLayout({
           offset={5}
         />
           <AuthProvider>
-            {children}
+            <div>{children}</div> 
           </AuthProvider>
       </body>
     </html>

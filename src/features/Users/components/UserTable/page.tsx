@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState } from "react";
 import { Column } from "react-table";
 import { TableProps } from "@/types/page";
@@ -8,7 +9,7 @@ import { API_SERVICES_URLS } from "@/data/page";
 import { BigModal, ConfirmModal } from "@/components/page";
 
 
-export const ProductTable: React.FC<{
+export const UserTable: React.FC<{
   leadResponseData: any;
   isLoadingLeads: boolean;
   setCurrentPage: any;
@@ -34,28 +35,11 @@ export const ProductTable: React.FC<{
   );
 
   const fixedColumns: Column<TableProps>[] = [
-    { id: "Name", Header: "إسم المنتج", accessor: "Name" },
-    { id: "SKU", Header: "SKU", accessor: "SKU" },
-    { id: "mainCategory", Header: "القسم الرئيسي", accessor: "mainCategory" },
-    { id: "subCategory", Header: "القسم الفرعي", accessor: "subCategory" },
-    { id: "Price", Header: "السعر", accessor: "Price" },
-    {
-      id: "Image",
-      Header: "Image",
-      accessor: "Image",
-      Cell: ({ value }) => (
-        <img
-          src={value}
-          alt="Category"
-          className="w-6 h-6 rounded-full"
-          width={15}
-          height={15}
-        />
-      ),
-    },
-    { id: "Quantity", Header: "الكمية", accessor: "Quantity" },
-    { id: "brandName", Header: "الماركة", accessor: "brandName" },
-    { id: "tagsNames", Header: "الفئة", accessor: "tagsNames" },
+    { id: "ID", Header: "ID", accessor: "ID" },
+    { id: "Name", Header: "Name", accessor: "Name" },
+    { id: "Email", Header: "Email", accessor: "Email" },
+    { id: "DateOfBirth", Header: "Date of birth", accessor: "DateOfBirth" },
+    { id: "Role", Header: "Role", accessor: "Role" },
     {
       id: "action",
       Header: "Action",
@@ -126,28 +110,29 @@ export const ProductTable: React.FC<{
   };
 
   useEffect(() => {
-    if (leadResponseData && leadResponseData.status === "success") {
-      const { data } = leadResponseData;
-
-      const mappedData = data.products.map((product: any) => ({
-        id: product._id,
+    if (leadResponseData) {
+      console.log("Lead Response Data:", leadResponseData); // Debugging
+  
+      // Map the response to the desired table format
+      const mappedData = leadResponseData.map((product: any) => ({
+        ID: product.id,
         Name: product.name,
-        SKU: product.sku,
-        mainCategory: product.mainCategoryName,
-        subCategory: product.subCategoryName,
-        Price: product.price,
-        Image: product.images[0],
-        Quantity: product.availableStock,
-        brandName: product.brandName[0],
-        tagsNames: product.tagsNames[0],
+        Email: product.email,
+        DateOfBirth: product.birthDay || "N/A",
+        Role: product.role || "N/A",
         action: "action",
       }));
-
+  
+      // Set the mapped data to tableData
       setTableData(mappedData);
-      setTotalPages(data.pagination.totalPages);
-      setTotalEntries(data.pagination.totalProducts);
+  
+      // Set pagination information
+      const totalItems = leadResponseData.length; // Assuming total items equal the length of the response
+      setTotalPages(Math.ceil(totalItems / 10));
+      setTotalEntries(totalItems);
     }
   }, [leadResponseData]);
+  
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
@@ -158,7 +143,7 @@ export const ProductTable: React.FC<{
 
   return (
     <div>
-      <div className="bg-lightSecondary rounded-[15px] mt-2 pt-4">
+      <div className=" rounded-[15px] mt-2 ">
         {isLoadingLeads ? (
           <div className="flex justify-center items-center py-3">
             <p>Data is Loading...</p>
@@ -204,4 +189,5 @@ export const ProductTable: React.FC<{
   );
 };
 
-export default ProductTable;
+export default UserTable;
+

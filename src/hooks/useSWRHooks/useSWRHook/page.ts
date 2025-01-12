@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 const useFetcher = () => {
   const authUser = getAuthData(); 
-  const accessToken = authUser?.accessToken || "";
+  const accessToken = authUser?.tokens.access.token || "";
   const router = useRouter();
   
   const fetcher: fetcherType = async ([url, method, options]: fetcherParametersType) => {

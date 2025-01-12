@@ -3,7 +3,7 @@ import React from 'react'
 
 const RegisterPage = () => {
   return (
-    <div className='px-20'><Register/></div>
+    <div ><Register/></div>
   )
 }
 

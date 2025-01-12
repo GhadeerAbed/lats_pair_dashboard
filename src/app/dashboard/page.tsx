@@ -1,13 +1,11 @@
 
-
-import { Products } from '@/features/page'
+import { Users } from '@/features/page'
 import React from 'react'
 
 const DashboardPage = () => {
   return (
     <div>
-      <Products/>
-     
+      <Users/>   
     </div>
   )
 }

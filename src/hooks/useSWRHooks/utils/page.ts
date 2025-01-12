@@ -5,7 +5,7 @@ import { fetcherParametersType, fetcherType } from "../types/page";
 import { getAuthData } from "../../../utils/page";
 export const useCustomFetcher = () => {
   const authUser = getAuthData(); 
-  const accessToken = authUser?.accessToken || "";
+  const accessToken = authUser?.tokens.access.token || "";
   
 
   const fetcher: fetcherType = async (
