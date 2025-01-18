@@ -47,20 +47,20 @@ export const FileInput: React.FC<FileInputProps> = ({
             <Image
               src={imageUrl}
               alt="Uploaded Logo"
-              className="object-fill w-[80px] h-[80px]"
+              className="object-fill w-[400px] h-[200px]"
               width={80}
               height={80}
          
             />
           </div>
         )}
-        <label className="px-4 py-3 cursor-pointer">
+        <label className=" py-3 cursor-pointer">
           <p className="underline text-base font-semibold text-fontColor1">
-            Upload Logo
+            Upload Cover Image
           </p>
-          <p className="text-darkSecondary text-sm pt-1">
+          {/* <p className="text-darkSecondary text-sm pt-1">
             Minimum Dimension 800px X 600 px (PNG - JPG)
-          </p>
+          </p> */}
           <input
             type="file"
             className="hidden"

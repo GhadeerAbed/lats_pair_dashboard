@@ -16,7 +16,7 @@ const config: Config = {
         darkPrimary: "#1D6A63",
         fontColor1: "#2C2C2C",
         fontColor2: "#727272",
-        secondary: "#D9D9D9",
+        secondary: "#737373",
         darkSecondary: "#8C8C8C",
         lightSecondary: "#F9F9F9",
         borderColor: "#BBBBBB",

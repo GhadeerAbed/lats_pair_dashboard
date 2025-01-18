@@ -5,15 +5,16 @@ import { useSWRHook } from "@/hooks/page";
 import { UserTable } from "./components/page";
 import { Button, Search } from "@/components/page";
 import { ViewIcon } from "@/lib/@heroicons/page";
+import { useRouter } from "next/navigation";
 
 export const TableList: React.FC = () => {
-  const limit = 10;
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
-
+  const DEFAULT_PAGE_SIZE = 10;
+  const router = useRouter();
   const API_SERVICES_URLS = {
-    GET_Products_LIST: (page: number, search: string) =>
-      `/users?limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ""}`,
+    GET_Products_LIST: (page: number, search: string, limit: number = DEFAULT_PAGE_SIZE) =>
+      `/users?page=${page}&limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ""}`,
   };
 
   const {
@@ -27,7 +28,7 @@ export const TableList: React.FC = () => {
   }, [currentPage, searchTerm, mutate]);
 
   const handleAddUser = () => {
-    console.log("Add User button clicked");
+    router.push("/dashboard/users/addUsers");
   };
 
   return (
@@ -55,6 +56,7 @@ export const TableList: React.FC = () => {
         isLoadingLeads={isLoadingLeads}
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
+        mutate={mutate}
       />
     </div>
   );

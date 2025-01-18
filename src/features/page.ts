@@ -5,11 +5,6 @@ export * from "./Auth/OtpPassword";
 export * from "./Dashboard/page";
 export * from "./Dashboard/profile";
 export * from "./Users/page";
-export * from "./Payment/page";
-export * from "./Payment/PaymentParent";
-export * from "./Offers/OfferList";
-export * from "./Order/page";
-export * from "./Offers/page";
+export * from "./Blogs/page";
 export * from "./Auth/Register";
 export * from "./Auth/SuccessRegister";
-export * from './Offers/Coupon'

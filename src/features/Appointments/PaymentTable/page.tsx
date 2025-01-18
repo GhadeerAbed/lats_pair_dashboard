@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Column } from "react-table";
 import { TableProps } from "@/types/page";
-import { Table } from "@/features/Order/components/page";
+
 
 export const PaymentTable: React.FC<{
   leadResponseData: any;

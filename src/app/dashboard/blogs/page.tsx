@@ -1,10 +1,10 @@
 
-import OffersParent from '@/features/Offers/page'
+import { AddBlogs } from '@/features/page'
 import React from 'react'
 
 const page = () => {
   return (
-    <OffersParent/>
+    <AddBlogs/>
   )
 }
 

@@ -47,14 +47,17 @@ export const ExpendedSide: FC<ExpendedSideProps> = ({}) => {
         title={"Users"}
         icon={<PackageSvg />}
         href={`/dashboard/users`}
-        isActive={isActive(`/dashboard/users`, [])}
-      />
+        isActive={isActive(`/dashboard/users`, [
+          '/dashboard/users/addUsers',
+          '/dashboard/users/addUsersPreferences',
+        ])}
+       />
 
       <ExpendedSideList
         title={"Blogs"}
         icon={<OrderSvg />}
         href={`/dashboard/blogs`}
-        isActive={isActive(`/dashboard/blogs`, [])}
+        isActive={isActive(`/dashboard/blogs`, ['/dashboard/blogs/addBlogs'])}
       />
       
       <ExpendedSideList
