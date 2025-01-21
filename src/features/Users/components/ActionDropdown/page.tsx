@@ -5,6 +5,8 @@ import { API_SERVICES_URLS } from "@/data/page";
 import { toast } from "sonner";
 import { DeleteIcon, EditIcon, EyeIcon } from "@/lib/@heroicons/page";
 import { useRouter } from "next/navigation";
+import { BigModal } from "@/components/page";
+import EditUserForm from "../EditUserForm/page";
 
 function useOutsideAlerter(ref: any, setDropdownOpen: any) {
   useEffect(() => {
@@ -32,22 +34,21 @@ export const ActionDropdown = ({
   const dropdownRef = useRef(null);
   useOutsideAlerter(dropdownRef, setDropdownOpen);
   const router = useRouter();
-  console.log(id)
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
   const { customTrigger: deleteUser } = useSWRMutationHook(
     API_SERVICES_URLS.DELATE_USER(id),
     "DELETE"
   );
 
-  const { customTrigger } = useSWRMutationHook(
-    API_SERVICES_URLS.UPDATE_USER(id),
-    "PATCH"
-  );
 
   const handleShowDetails = () => {
     setDropdownOpen(false);
     router.push(`/dashboard/users/${id}`); // Navigate to the details page
   };
-
+  const handleEditUser = () => {
+    setDropdownOpen(false);
+    setEditModalOpen(true); // Open the edit modal
+  };
   const handleUserDelete = async () => {
     try {
       const res = await deleteUser({ isDeleted: true });
@@ -64,9 +65,10 @@ export const ActionDropdown = ({
       setDropdownOpen(false);
     }
   };
-  console.log(id)
+
 
   return (
+    <>
     <div className="relative inline-block text-left " ref={dropdownRef}>
       <div>
         <button
@@ -80,7 +82,7 @@ export const ActionDropdown = ({
 
       {dropdownOpen && (
         <div
-          className="origin-top-right absolute font-nunito -ml-12 w-[140px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+          className=" absolute font-nunito -mt-[125px] -ml-10 w-[140px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"
@@ -97,6 +99,7 @@ export const ActionDropdown = ({
             </button>
 
             <button
+              onClick={handleEditUser}
               className=" flex text-secondary  w-full gap-2 text-left px-4 py-2 text-sm hover:bg-gray-100"
               role="menuitem"
             >
@@ -116,6 +119,10 @@ export const ActionDropdown = ({
         </div>
       )}
     </div>
+    <BigModal isOpen={isEditModalOpen} closeModal={() => setEditModalOpen(false)}>
+      <EditUserForm id={id} />
+    </BigModal>
+    </>
   );
 };
 

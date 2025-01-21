@@ -69,7 +69,7 @@ export const Table: React.FC<{
         <>
           <div className="z-0">
             <div className="overflow-x-auto  ">
-              <table {...getTableProps()} >
+              <table {...getTableProps()} style={{ width: "100%" }}>
                 <thead>
                   {headerGroups.map((headerGroup) => (
                     <tr

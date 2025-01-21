@@ -29,7 +29,7 @@ export const BigModal = ({ isOpen, closeModal, children ,ModalclassName , isSide
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <DialogPanel className={`${ModalclassName} w-full max-w-xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all`}>
+              <DialogPanel className={`${ModalclassName} w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all`}>
                 {children}
               </DialogPanel>
             </TransitionChild>

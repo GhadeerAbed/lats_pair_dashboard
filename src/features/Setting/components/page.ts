@@ -1,3 +1,3 @@
 export * from './Table/page'
 export * from './OrderTable/page'
-export * from './EditOrder/page'
+export * from './EditSetting/page'

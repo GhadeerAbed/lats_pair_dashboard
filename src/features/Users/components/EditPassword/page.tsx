@@ -6,7 +6,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-export const AddUserForm = () => {
+export const EditPassword = () => {
   const { customTrigger, isMutating } = useSWRMutationHook(
     API_SERVICES_URLS.CREATE_USER,
     "POST"
@@ -20,30 +20,24 @@ export const AddUserForm = () => {
 
   const onSubmit = async (data: any) => {
     const formattedData = {
-      email: data.email,
       password: data.password,
-      name: data.name,
-      role: "USER",
-      birthDay: data.birthDay,
-      phoneNumber: data.phoneNumber,
-      guardianEmail: data.guardianEmail,
-      address: data.address,
     };
 
     try {
       const res = await customTrigger(formattedData);
       if (res.status >= 400) {
         // Show error toast if status code is 400 or above
-        toast.error(res.message || "An error occurred while deleting the user.");
+        toast.error(
+          res.message || "An error occurred while deleting the user."
+        );
       } else {
         // Show success toast for status codes below 400
         if (res.id) {
           localStorage.setItem("userId", res.id); // Save the ID in local storage
         }
-  
+
         toast.success(res.message || "User deleted successfully!");
       }
-  
     } catch (error) {
       toast.error("Failed to create user. Please try again.");
     }
@@ -52,35 +46,38 @@ export const AddUserForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="p-6 bg-white shadow-md rounded-md  w-full mx-auto"
+      className="p-6 border bg-white rounded-md  w-full mx-auto"
     >
-      <h1 className="text-3xl font-semibold  text-primary mb-4">Add User</h1>
-      <h2>Personal Information</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 mt-4">
+      <h1 className="text-3xl font-semibold  text-primary mb-4">
+        Edit Password
+      </h1>
+      <div className="grid grid-cols-1 gap-4 mb-4 mt-4">
         <div>
           <Input
-            type="text"
-            label="Name"
-            {...register("name", { required: "Name is required" })}
+            type="password"
+            label="Password"
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters long",
+              },
+              pattern: {
+                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@#$%^&+=!]{8,}$/,
+                message: "Password must contain at least 1 letter and 1 number",
+              },
+            })}
           />
-          {errors.name && (
-            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-          )}
-        </div>
-        <div>
-          <Input
-            type="email"
-            label="Email"
-            {...register("email", { required: "Email is required" })}
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+          {errors.password && (
+            <p className="text-red-500 text-sm mt-1">
+              {errors.password.message}
+            </p>
           )}
         </div>
         <div>
           <Input
             type="password"
-            label="Password"
+            label="NewPassword"
             {...register("password", {
               required: "Password is required",
               minLength: {
@@ -115,41 +112,6 @@ export const AddUserForm = () => {
             </p>
           )}
         </div>
-        <div>
-          <Input
-            type="text"
-             placeholder="dd-mm-yyyy"
-            {...register("birthDay", {
-              required: "Date of Birth is required",
-              pattern: {
-                value: /^\d{2}-\d{2}-\d{4}$/,
-                message: "Format should be dd-mm-yyyy",
-              },
-              setValueAs: (value) => value.replace(/\//g, "-"), // Convert slashes to dashes
-            })}
-            label="BirthDay"
-          />
-          {errors.birthDay && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.birthDay.message}
-            </p>
-          )}
-        </div>
-
-        <Input label="Phone Number" type="tel" {...register("phoneNumber")} />
-
-        <Input
-          type="text"
-          {...register("guardianEmail")}
-          label="Guardian Email"
-        />
-
-        <Input type="text" label="Address" {...register("address")} />
-      </div>
-
-      <div className="flex items-center text-darkSecondary text-[14px]">
-        <Checkbox />{" "}
-        <span className="px-2">I agree to the terms and conditions</span>
       </div>
 
       <Button
@@ -163,4 +125,4 @@ export const AddUserForm = () => {
   );
 };
 
-export default AddUserForm;
+export default EditPassword;

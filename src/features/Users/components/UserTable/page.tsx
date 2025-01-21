@@ -40,12 +40,8 @@ export const UserTable: React.FC<{
           />
         );
       },
-      
     },
   ];
-
-  
-
 
   useEffect(() => {
     if (leadResponseData) {
@@ -61,11 +57,9 @@ export const UserTable: React.FC<{
         action: "action",
       }));
 
-      // Set the mapped data to tableData
       setTableData(mappedData);
 
-      // Set pagination information
-      const totalItems = leadResponseData.length; // Assuming total items equal the length of the response
+      const totalItems = leadResponseData.length;
       setTotalPages(Math.ceil(totalItems / 10));
       setTotalEntries(totalItems);
     }

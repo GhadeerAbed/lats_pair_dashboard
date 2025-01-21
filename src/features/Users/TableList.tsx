@@ -13,8 +13,16 @@ export const TableList: React.FC = () => {
   const DEFAULT_PAGE_SIZE = 10;
   const router = useRouter();
   const API_SERVICES_URLS = {
-    GET_Products_LIST: (page: number, search: string, limit: number = DEFAULT_PAGE_SIZE) =>
-      `/users?page=${page}&limit=${limit}${search ? `&search=${encodeURIComponent(search)}` : ""}`,
+    GET_Products_LIST: (
+      page: number,
+      search: string,
+      limit: number = DEFAULT_PAGE_SIZE
+    ) => {
+      const searchKey = search.includes("@") ? "email" : "name";
+      return `/users?page=${page}&limit=${limit}&searchkey=${searchKey}${
+        search ? `&search=${encodeURIComponent(search)}` : ""
+      }`;
+    },
   };
 
   const {

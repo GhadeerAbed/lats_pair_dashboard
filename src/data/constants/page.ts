@@ -12,7 +12,9 @@ export const API_SERVICES_URLS = {
   DELATE_USER: (id: string) => `/users/${id}`,
   UPDATE_USER: (id: string) => `/users/${id}`,
   GET_USER_ID: (id: string) => `/users/${id}`,
-  GET_REF_USER_ID: (id: string) => `/users-prefs/user/${id}`,
+  GET_REF_USER_USERID: (id: string) => `/users-prefs/user/${id}`,
+  GET_REF_USER_ID: (id: string) => `/users-prefs/${id}`,
+  UPDATE_USER_PREF: (id: string) => `/users-prefs/${id}`,
   DELETE_OFFER: (id: string) => `/offers/${id}`,
   EDIT_ORDER: (id: string) => `/admin/order/${id}`,
   DELETE_ORDER: (id: string) => `/admin/order/${id}`,
@@ -20,9 +22,9 @@ export const API_SERVICES_URLS = {
   GET_SUB_CATEGORIES: (id: string) => `/category/subCategory/${id}`,
   GET_TAGS: `/tags`,
   GET_BRANDS: "/brand",
+
   CREATE_USER: `/users`,
   CREATE_USER_PREF: `/users-prefs`,
-  UPDATE_PRODUCT: (id: string) => `/products/${id}`,
   CREATE_BLOGS: `/blog`,
   SEARCH_PRODUCTS: (productName: string) =>
     `/vendor/search-product/${productName}`,
