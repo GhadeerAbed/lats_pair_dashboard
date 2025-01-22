@@ -1,3 +1,3 @@
 
-export * from './EditCustomerProfile/page'
+export * from './ShowBlog/page'
 export * from './BlogForm/page'
