@@ -1,10 +1,11 @@
 
-import Order from '@/features/Order/page'
+
+import SettingMain from '@/features/Setting/page'
 import React from 'react'
 
 const page = () => {
   return (
-    <Order/>
+    <SettingMain/>
   )
 }
 

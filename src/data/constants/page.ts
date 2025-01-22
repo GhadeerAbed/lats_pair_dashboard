@@ -15,22 +15,15 @@ export const API_SERVICES_URLS = {
   GET_REF_USER_USERID: (id: string) => `/users-prefs/user/${id}`,
   GET_REF_USER_ID: (id: string) => `/users-prefs/${id}`,
   UPDATE_USER_PREF: (id: string) => `/users-prefs/${id}`,
+  GET_CONFIG: "/config",
+  UPDATE_CONFIG: (id: string) => `/config/${id}`,
   DELETE_OFFER: (id: string) => `/offers/${id}`,
   EDIT_ORDER: (id: string) => `/admin/order/${id}`,
   DELETE_ORDER: (id: string) => `/admin/order/${id}`,
   GET_MAIN_CATEGORY: `/category/main`,
   GET_SUB_CATEGORIES: (id: string) => `/category/subCategory/${id}`,
-  GET_TAGS: `/tags`,
-  GET_BRANDS: "/brand",
 
   CREATE_USER: `/users`,
   CREATE_USER_PREF: `/users-prefs`,
   CREATE_BLOGS: `/blog`,
-  SEARCH_PRODUCTS: (productName: string) =>
-    `/vendor/search-product/${productName}`,
-  DELATE_PRODUCT: (id: string) => `/products/${id}`,
-  EDIT_PRODUCT: (id: string) => `/products/${id}`,
-  GET_PAYMENT:`/vendor/monthly-sales?year=2024`,
-  GET_VISES:`/vendor/monthly-visitors?year=2024`,
-  CREATE_COUPON:"/coupon"
 };

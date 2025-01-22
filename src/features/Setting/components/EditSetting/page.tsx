@@ -6,14 +6,14 @@ import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-export const EditSetting = ({ id }: { id: string }) => {
+export const EditSetting = () => {
   const { customTrigger, isMutating } = useSWRMutationHook(
-    API_SERVICES_URLS.UPDATE_USER(id),
+    API_SERVICES_URLS.UPDATE_CONFIG(localStorage.getItem("settingsId")),
     "PATCH"
   );
-  const { data, error, isLoading } = useSWRHook(
-    API_SERVICES_URLS.GET_USER_ID(id)
-  );
+  const { data: settings, error, isLoading } = useSWRHook(API_SERVICES_URLS.GET_CONFIG);
+  const userSettings =
+  Array.isArray(settings) && settings.length > 0 ? settings[0] : null;
 
   const {
     register,
@@ -22,46 +22,45 @@ export const EditSetting = ({ id }: { id: string }) => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      name: "",
-      email: "",
-      birthDay: "",
-      phoneNumber: "",
-      guardianEmail: "",
-      address: "",
+      numComputers: "",
+      startDay: "",
+      endDay: "",
+      duration: "",
+      // sessionCost: "",
     },
   });
 
   // Effect to reset form values when data is fetched
   useEffect(() => {
-    if (data) {
+    if (userSettings) {
       reset({
-        name: data?.name || "",
-        email: data?.email || "",
-        birthDay: data?.birthDay || "",
-        phoneNumber: data?.phoneNumber || "",
-        guardianEmail: data?.guardianEmail || "",
-        address: data?.address || "",
+        numComputers: userSettings?.numComputers || "",
+        startDay: userSettings?.startDay || "",
+        endDay: userSettings?.endDay || "",
+        duration: userSettings?.duration || "",
+        // sessionCost: userSettings?.sessionCost || "",
       });
     }
-  }, [data, reset]);
+  }, [userSettings, reset]);
 
   const onSubmit = async (formData: any) => {
     const formattedData = {
-      email: formData.email,
-      name: formData.name,
-      birthDay: formData.birthDay,
-      phoneNumber: formData.phoneNumber,
-      guardianEmail: formData.guardianEmail,
-      address: formData.address,
+      numComputers: formData.numComputers,
+      startDay: formData.startDay,
+      endDay: formData.endDay,
+      duration: formData.duration,
+      // sessionCost: formData.sessionCost,
     };
 
     try {
-      const response = await customTrigger(formattedData);
+      const res = await customTrigger(formattedData);
 
-      if (response.status === 200 || response.status === 201) {
-        toast.success("User updated successfully!");
+      if (res.status >= 400) {
+        toast.error(
+          res.message || "An error occurred while deleting the user."
+        );
       } else {
-        toast.error(`Failed to update user. Status: ${response.status}`);
+        toast.success(res.message || "User deleted successfully!");
       }
     } catch (error) {
       console.error("Error updating user:", error);
@@ -88,43 +87,26 @@ export const EditSetting = ({ id }: { id: string }) => {
           <Input
             type="text"
             label="Number of Computers"
-            {...register("name", { required: "Name is required" })}
+            {...register("numComputers")}
           />
-          {errors.name && (
-            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-          )}
         </div>
         <div>
-          <Input
-            type="date"
-            label="Start Time"
-            {...register("startTime", { required: "Email is required" })}
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
-          )}
+          <Input type="text" label="Start Time" {...register("startDay")} />
         </div>
 
         <div>
           <Input
             type="text"
             placeholder="End Time"
-            {...register("endTime ", {
-              required: "Date of Birth is required",
-            })}
-            label="BirthDay"
+            {...register("endDay")}
+            label="End Time"
           />
-          {errors.birthDay && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.birthDay.message}
-            </p>
-          )}
         </div>
 
         <Input
           label="Session Duration/ hh"
-          type="tel"
-          {...register("sessionDuration")}
+          type="text"
+          {...register("duration")}
         />
         <Input
           label="Session Cost / $"
