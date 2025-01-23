@@ -30,4 +30,8 @@ export const API_SERVICES_URLS = {
   GET_BLOGS: `/blog`,
   UPDATE_BLOG: (id: string) => `/blog/${id}`,
   GET_BLOG_ID: (id: string) => `/blog/${id}`,
+  GET_STATISTICS: `/users/stats`,
+  GET_AVAILABILITY_APPOINTMENT: "/appointment/get-availability",
+  GET_APPOINTMENTS: "/appointment",
+  GET_APPOINTMENT: (id: string) => `/appointment/${id}`,
 };

@@ -3,7 +3,6 @@ export * from "./Auth/ForgetPassword";
 export * from "./Auth/NewPassword";
 export * from "./Auth/OtpPassword";
 export * from "./Dashboard/page";
-export * from "./Dashboard/profile";
 export * from "./Users/page";
 export * from "./Blogs/page";
 export * from "./Auth/Register";

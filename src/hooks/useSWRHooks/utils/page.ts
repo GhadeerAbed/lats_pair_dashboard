@@ -1,12 +1,9 @@
-
-
 import axios from "../../../lib/axios/page";
-import { fetcherParametersType, fetcherType } from "../types/page";
+import { fetcherParametersType, fetcherType } from "../useSWRHook/types/page";
 import { getAuthData } from "../../../utils/page";
 export const useCustomFetcher = () => {
-  const authUser = getAuthData(); 
+  const authUser = getAuthData();
   const accessToken = authUser?.tokens.access.token || "";
-  
 
   const fetcher: fetcherType = async (
     [url, method, options]: fetcherParametersType,

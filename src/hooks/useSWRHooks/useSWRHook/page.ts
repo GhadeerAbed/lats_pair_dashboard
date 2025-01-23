@@ -1,25 +1,28 @@
 import { useSWR } from "../../../lib/swr/page";
-import { fetcherParametersType, fetcherType } from "../types/page";
+import { fetcherParametersType, fetcherType } from "./types/page";
 import axios from "axios";
 import { API_ENDPOINT } from "../../../data/page";
 import { getAuthData } from "../../../utils/page";
 import { useRouter } from "next/navigation";
 
-
 const useFetcher = () => {
-  const authUser = getAuthData(); 
+  const authUser = getAuthData();
   const accessToken = authUser?.tokens.access.token || "";
   const router = useRouter();
-  
-  const fetcher: fetcherType = async ([url, method, options]: fetcherParametersType) => {
+
+  const fetcher: fetcherType = async ([
+    url,
+    method,
+    options,
+  ]: fetcherParametersType) => {
     if (url == API_ENDPOINT || url.includes("undefined")) return;
-    
+
     try {
       const response = await axios({
         url,
         method,
         ...options,
-        headers: { 
+        headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
@@ -32,7 +35,7 @@ const useFetcher = () => {
       throw error;
     }
   };
-  
+
   return { fetcher };
 };
 

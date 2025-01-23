@@ -1,3 +1,3 @@
 
-export * from './ProfileDetails/page'
-export * from './ProfileSecurity/page'
+
+export * from './Statistic/page'

@@ -5,8 +5,12 @@ export type TableProps = {
   DateOfBirth?:string,
   Email?:string,
   Role?:string,
-  action?:string
-  
+  action?:string,
+  startTime?:string,
+  endTime?:string,
+  paymentStatus?:string,
+  isPaired?:boolean,
+
   SKU?:string,
   mainCategory?:string,
   subCategory?:string,
