@@ -1,11 +1,20 @@
 "use client";
+import { BigModal } from "@/components/page";
 import { API_SERVICES_URLS } from "@/data/page";
 import { useSWRHook } from "@/hooks/page";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import EditAppointment from "../EditAppointment/page";
 
 export const ShowAppointment = ({ id }: { id: string }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter()
   const { data } = useSWRHook(API_SERVICES_URLS.GET_APPOINTMENT(id));
+  if (data){
+    localStorage.setItem("APP_Id", data.user.id)
 
+  }
+ 
   if (!data) return <p>Loading...</p>;
 
   // Convert date to a more readable format
@@ -19,6 +28,7 @@ export const ShowAppointment = ({ id }: { id: string }) => {
   };
 
   return (
+    <>
     <div className="bg-white p-6 rounded-lg shadow-md">
       {/* Date Box */}
       <div className="flex items-center space-x-4">
@@ -121,14 +131,18 @@ export const ShowAppointment = ({ id }: { id: string }) => {
 
       {/* Action Buttons */}
       <div className="mt-6 flex space-x-4">
-        <button className="border border-primary text-primary px-4 py-2 rounded-md">
+        <button className="border border-primary text-primary px-4 py-2 rounded-md" onClick={()=>router.replace(`/dashboard/appointments/${id}/slot`)} >
           Reschedule
         </button>
-        <button className="bg-primary text-white px-4 py-2 rounded-md">
+        <button className="bg-primary text-white px-4 py-2 rounded-md" onClick={()=>setIsModalOpen(true)}>
           Edit
         </button>
       </div>
     </div>
+    <BigModal isOpen={isModalOpen} closeModal={()=>setIsModalOpen(false)}>
+      <EditAppointment />
+    </BigModal>
+    </>
   );
 };
 

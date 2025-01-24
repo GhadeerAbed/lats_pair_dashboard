@@ -12,8 +12,11 @@ import {
 import Image from "next/image";
 import { getAuthData } from "@/utils/page";
 import TableList from "../../TableList";
+import TimeSlote from "@/components/TimeSlote/page";
+import { API_SERVICES_URLS } from "@/data/page";
+import { useSWRHook } from "@/hooks/page";
 
-export const BookingCalendar = () => {
+export const BookingCalendar = ({ id }: { id?: number }) => {
   const today = startOfDay(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
@@ -36,27 +39,32 @@ export const BookingCalendar = () => {
     setStartDate(addDays(startDate, 7));
   };
 
-  const isDateSelected = (date: Date) => {
-    return format(date, "yyyy-MM-dd") === format(selectedDate, "yyyy-MM-dd");
-  };
+  const isDateSelected = (date: Date) =>
+    format(date, "yyyy-MM-dd") === format(selectedDate, "yyyy-MM-dd");
 
   const isPrevDisabled =
-    isSameDay(startDate, today) || isBefore(startDate, today);
+    isBefore(startDate, today) || isSameDay(startDate, today);
 
-  // Format date for API request
   const formattedDate = format(selectedDate, "dd-MM-yyyy");
 
-  // // Fetch availability data using useSWRHook
-  // const { data } = useSWRHook(
-  //   `${API_SERVICES_URLS.GET_AVAILABILITY_APPOINTMENT}?date=${formattedDate}`
-  // );
+  // Ensure API URL is only set when id is present
+  const apiUrl = id
+    ? `${
+        API_SERVICES_URLS.GET_AVAILABILITY_APPOINTMENT
+      }?date=${encodeURIComponent(formattedDate)}&userId=${localStorage.getItem(
+        "APP_Id"
+      )}`
+    : null;
 
-  // const formattedSelectedDate = format(selectedDate, "dd MMMM yyyy");
+  // Fetch availability data using useSWRHook only if apiUrl is valid
+  const { data } = useSWRHook(apiUrl);
 
   return (
-    <div className="flex flex-col text-sm lg:text-base  py-6">
+    <div className="flex flex-col text-sm lg:text-base py-6">
       <div className="mb-8">
-        <h2 className="mb-4 text-lg font-semibold pb-5">Select Date To Show Appointment</h2>
+        <h2 className="mb-4 text-lg font-semibold pb-5">
+          Select Date To Show Appointment
+        </h2>
         <div className="flex items-center justify-between">
           <button
             onClick={handlePrev}
@@ -75,7 +83,7 @@ export const BookingCalendar = () => {
               className="inline-block"
             />
           </button>
-          <div className="flex  border rounded w-full max-w-[850px] text-center">
+          <div className="flex border rounded w-full max-w-[850px] text-center">
             {weekDates.map((date, idx) => (
               <button
                 key={idx}
@@ -104,10 +112,25 @@ export const BookingCalendar = () => {
             />
           </button>
         </div>
-        {/* <div className="border mt-10"></div>
-        <h3 className="my-5">Date: {formattedSelectedDate}</h3> */}
       </div>
-      <TableList formattedDate={formattedDate} />
+      {!id ? (
+        <TableList formattedDate={formattedDate} />
+      ) : (
+        <>
+         <h2 className=" text-lg">Select Time Slot</h2>
+          <div className="grid grid-cols-2 gap-5 w-full max-w-[800px] mx-auto mt-5">
+            {data &&
+              Object.entries(data).map(([time, availability]) => (
+                <TimeSlote
+                  key={`${time}-${formattedDate}`}
+                  date={formattedDate}
+                  time={time}
+                  availability={availability}
+                />
+              ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };

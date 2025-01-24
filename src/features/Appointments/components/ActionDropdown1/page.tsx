@@ -26,8 +26,10 @@ function useOutsideAlerter(ref: any, setDropdownOpen: any) {
 export const ActionDropdown1 = ({
   id,
   mutate,
+  userId
 }: {
   id: any;
+  userId:any;
   mutate: () => void;
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -43,7 +45,7 @@ export const ActionDropdown1 = ({
 
   const handleShowDetails = () => {
     setDropdownOpen(false);
-    router.push(`/dashboard/appointments/${id}`); // Navigate to the details page
+    router.push(`/dashboard/appointments/${userId}`); // Navigate to the details page
   };
   const handleEditUser = () => {
     setDropdownOpen(false);

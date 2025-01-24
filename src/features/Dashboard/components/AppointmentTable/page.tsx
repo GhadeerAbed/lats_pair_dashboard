@@ -39,8 +39,9 @@ export const AppointmentTable: React.FC<{
         console.log(row)
         return (
           <ActionDropdown1
-            id={row.original.userId} // Pass the id here
-            mutate={mutate} // Pass any other props
+            userId={row.original.userId} 
+            id={row.original.ID}
+            mutate={mutate} 
           />
         );
       },

@@ -30,7 +30,7 @@ const TimeSlote = ({ time, date, availability }: TimeSlotProps) => {
       tabIndex={0}
       aria-label={`Select time slot at ${formatTime(time)}`}
       role="button"
-      className={`flex items-center rounded-lg  shadow-md overflow-hidden w-full lg:w-[290px]`}
+      className={`flex items-center rounded-lg  shadow-md overflow-hidden w-full `}
     >
       <div
         className={` ${
