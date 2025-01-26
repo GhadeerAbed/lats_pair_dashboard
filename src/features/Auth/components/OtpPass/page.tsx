@@ -33,8 +33,6 @@ export const OtpPass = () => {
       });
 
       if (response?.status === "success" && response.data) {
-        // Handle success
-        console.log(response.data.message);
         router.push(`/login/newPassword`);
       } else {
         setErrorMessage("otp verification failed");

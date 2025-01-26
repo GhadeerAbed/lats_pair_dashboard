@@ -34,4 +34,9 @@ export const API_SERVICES_URLS = {
   GET_AVAILABILITY_APPOINTMENT: "/appointment/get-availability",
   GET_APPOINTMENTS: "/appointment",
   GET_APPOINTMENT: (id: string) => `/appointment/${id}`,
+  UPDATE_SESSION: (id: string) => `/appointment/${id}`,
+  APPOINTMENT_RESCHEDULE_PAIR:`/appointment/reschedule-pair`,
+  APPOINTMENT_RESCHEDULE:(id: string) => `/appointment/reschedule/${id}`,
+  CREATE_APPOINTMENT:'/appointment',
+  CREATE_PAIR_APPOINTMENT:'/appointment/pair-booking'
 };

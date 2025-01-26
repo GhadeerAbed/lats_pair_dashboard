@@ -36,7 +36,6 @@ export const AppointmentTable: React.FC<{
       Header: "Action",
       accessor: "action",
       Cell: ({ row }) => {
-        console.log(row)
         return (
           <ActionDropdown1
             userId={row.original.userId} 

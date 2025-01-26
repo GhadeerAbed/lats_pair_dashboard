@@ -12,14 +12,13 @@ export const TableList: React.FC = ({formattedDate}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const DEFAULT_PAGE_SIZE = 10;
 
-  const router = useRouter();
   const API_SERVICES_URLS = {
     GET_Products_LIST: (
       page: number,
       search: string,
       limit: number = DEFAULT_PAGE_SIZE
     ) => {
-      return `/appointment?page=${page}&limit=${limit}&date=${formattedDate}${
+      return `/appointment?page=${page}&limit=${limit}&date=${formattedDate}&searchkey=name${
         search ? `&search=${encodeURIComponent(search)}` : ""
       }`;
     },
@@ -32,13 +31,12 @@ export const TableList: React.FC = ({formattedDate}) => {
   } = useSWRHook(API_SERVICES_URLS.GET_Products_LIST(currentPage, searchTerm));
 
   useEffect(() => {
+    
     mutate();
   }, [currentPage, searchTerm, mutate]);
  
 
-  const handleAddUser = () => {
-    router.push("/dashboard/users/addUsers");
-  };
+
 
   return (
     <div className="bg-white rounded-[15px] w-full p-4">
@@ -52,12 +50,12 @@ export const TableList: React.FC = ({formattedDate}) => {
             <ViewIcon className="w-5 h-5" />
             <span className="font-medium pl-1">Filter</span>
           </Button>
-          <Button
+          {/* <Button
             className="bg-primary text-white px-6 py-2"
             onClick={handleAddUser}
           >
            Book Now
-          </Button>
+          </Button> */}
         </div>
       </div>
       <AppointmentTable

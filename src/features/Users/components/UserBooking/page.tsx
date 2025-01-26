@@ -10,12 +10,11 @@ import {
   isSameDay,
 } from "date-fns";
 import Image from "next/image";
-import TableList from "../../TableList";
-import TimeSlote from "@/components/TimeSlote/page";
 import { API_SERVICES_URLS } from "@/data/page";
 import { useSWRHook } from "@/hooks/page";
+import BookTimeSlot from "../BookTimeSlot/page";
 
-export const BookingCalendar = ({ id }: { id?: any }) => {
+export const UserBooking = ({ id }: { id?: any }) => {
   const today = startOfDay(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
@@ -49,16 +48,12 @@ export const BookingCalendar = ({ id }: { id?: any }) => {
   const apiUrl = id
     ? `${
         API_SERVICES_URLS.GET_AVAILABILITY_APPOINTMENT
-      }?date=${encodeURIComponent(formattedDate)}&userId=${localStorage.getItem(
-        "APP_Id"
-      )}`
+      }?date=${encodeURIComponent(formattedDate)}&userId=${id}`
     : null;
 
   const { data } = useSWRHook(apiUrl);
 
   const { data: slotData } = useSWRHook(API_SERVICES_URLS.GET_APPOINTMENT(id));
-
-
 
   return (
     <div className="flex flex-col text-sm lg:text-base py-6">
@@ -114,29 +109,22 @@ export const BookingCalendar = ({ id }: { id?: any }) => {
           </button>
         </div>
       </div>
-      {!id ? (
-        <TableList formattedDate={formattedDate} />
-      ) : (
-        <>
-          <h2 className=" text-lg">Select Time Slot</h2>
-          <div className="grid grid-cols-2 gap-5 w-full max-w-[800px] mx-auto mt-5">
-            {data &&
-              Object.entries(data).map(([time, availability]) => (
-                <TimeSlote
-                  id={id}
-                  pairedAppointmentId={slotData?.pairedAppointmentId}
-                  IsPaired={slotData?.isPaired}
-                  key={`${time}-${formattedDate}`}
-                  date={formattedDate}
-                  time={time}
-                  availability={availability}
-                />
-              ))}
-          </div>
-        </>
-      )}
+
+      <h2 className=" text-lg">Select Time Slot</h2>
+      <div className="grid grid-cols-2 gap-5 w-full max-w-[800px] mx-auto mt-5">
+        {data &&
+          Object.entries(data).map(([time, availability]) => (
+            <BookTimeSlot
+              id={id}
+              key={`${time}-${formattedDate}`}
+              date={formattedDate}
+              time={time}
+              availability={availability}
+            />
+          ))}
+      </div>
     </div>
   );
 };
 
-export default BookingCalendar;
+export default UserBooking;

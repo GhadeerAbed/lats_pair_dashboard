@@ -39,8 +39,8 @@ export const PackageSvg = (props: any) => {
         stroke-linejoin="round"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M11.9377 14.71C15.1846 14.71 17.9584 15.2013 17.9584 17.1675C17.9584 19.1329 15.2029 19.6425 11.9377 19.6425C8.68997 19.6425 5.91705 19.1512 5.91705 17.185C5.91705 15.2187 8.67255 14.71 11.9377 14.71Z"
         stroke="currentColor"
         stroke-width="1.5"
@@ -48,8 +48,8 @@ export const PackageSvg = (props: any) => {
         stroke-linejoin="round"
       />
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M11.9377 11.9049C9.79638 11.9049 8.07947 10.188 8.07947 8.04575C8.07947 5.90442 9.79638 4.1875 11.9377 4.1875C14.0791 4.1875 15.796 5.90442 15.796 8.04575C15.796 10.188 14.0791 11.9049 11.9377 11.9049Z"
         stroke="currentColor"
         stroke-width="1.5"

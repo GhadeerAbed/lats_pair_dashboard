@@ -140,7 +140,7 @@ export const ShowAppointment = ({ id }: { id: string }) => {
       </div>
     </div>
     <BigModal isOpen={isModalOpen} closeModal={()=>setIsModalOpen(false)}>
-      <EditAppointment />
+      <EditAppointment id={id}/>
     </BigModal>
     </>
   );

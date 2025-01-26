@@ -49,7 +49,6 @@ export const NewPass = () => {
       });
 
       if (response?.status === "success") {
-        console.log("Password has been reset successfully");
         updateUserData(response.data.data);
         router.push((`/login`));
         

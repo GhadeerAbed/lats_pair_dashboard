@@ -45,9 +45,7 @@ export const UserTable: React.FC<{
 
   useEffect(() => {
     if (leadResponseData) {
-      console.log("Lead Response Data:", leadResponseData); // Debugging
-
-      // Map the response to the desired table format
+     
       const mappedData = leadResponseData.map((product: any) => ({
         ID: product.id,
         Name: product.name,

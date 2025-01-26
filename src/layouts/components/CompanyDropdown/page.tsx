@@ -1,7 +1,6 @@
 "use client";
 import { useAuth } from "@/components/page";
 import React, { useState, useRef, useEffect } from "react";
-import { team, down } from "../../../../public/assest/page";
 import Image from "next/image";
 
 
@@ -36,21 +35,21 @@ export const CompanyDropdown = () => {
           className="inline-flex justify-center w-full  py-2  font-Sans font-medium text-gray-700  focus:outline-none capitalize ltr:border-r-2 ltr:pr-2 rtl:border-l-2  rtl:pl-2"
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
-          <Image
+          {/* <Image
             src={team}
             alt="trust-logo"
             width={18}
             height={18}
             className="mx-3"
-          />
+          /> */}
           <span>{companyName}</span>
-          <Image
+          {/* <Image
             src={down}
             alt="trust-logo"
             width={12}
             height={12}
             className="mx-3 mt-[10px]"
-          />
+          /> */}
         </button>
       </div>
 
