@@ -1,3 +1,4 @@
+"use client"
 import { Button, Select } from "@/components/page";
 import { API_SERVICES_URLS } from "@/data/page";
 import { useSWRHook, useSWRMutationHook } from "@/hooks/page";
