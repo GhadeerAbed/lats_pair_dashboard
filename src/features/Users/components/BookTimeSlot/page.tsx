@@ -1,9 +1,10 @@
-"use client"
+"use client";
 import { useState } from "react";
 import { API_SERVICES_URLS } from "@/data/page";
 import { useSWRMutationHook } from "@/hooks/page";
 import { BigModal } from "@/components/page";
 import BookSessionForm from "../BookSessionForm/page";
+import { toast } from "sonner";
 
 interface TimeSlotProps {
   time: string;
@@ -32,8 +33,10 @@ export const BookTimeSlot = ({
     "POST"
   );
 
-  const { customTrigger: createPairAppointment, isMutating: isLoadingAppointment } =
-    useSWRMutationHook(API_SERVICES_URLS.CREATE_PAIR_APPOINTMENT, "POST");
+  const {
+    customTrigger: createPairAppointment,
+    isMutating: isLoadingAppointment,
+  } = useSWRMutationHook(API_SERVICES_URLS.CREATE_PAIR_APPOINTMENT, "POST");
 
   const formatTime = (time: string): string => {
     const [hours, minutes] = time.split(":").map(Number);
@@ -58,19 +61,36 @@ export const BookTimeSlot = ({
       duration: 60,
       date: date,
     };
-
-    if (sessionType === "ALONE") {
-      await customTrigger(commonData);
-    } else if (sessionType === "PAIR") {
-      const pairData = {
-        ...commonData,
-        pairId: Number(pairId),
-        isPaired: true,
-      };
-      await createPairAppointment(pairData);
+  
+    try {
+      let res;
+      if (sessionType === "ALONE") {
+        res = await customTrigger(commonData);
+      } else if (sessionType === "PAIR") {
+        const pairData = {
+          ...commonData,
+          pairId: Number(pairId),
+          isPaired: true,
+        };
+        res = await createPairAppointment(pairData);
+      }
+  
+      // Check API response status
+      if (res?.status >= 400) {
+        toast.error(res?.message || "An error occurred.");
+      } else {
+        toast.success(
+          res?.message || 
+          (sessionType === "ALONE" 
+            ? "Appointment booked successfully!" 
+            : "Paired appointment booked successfully!"
+          )
+        );
+      }
+    } catch (error) {
+      toast.error("Failed to book appointment. Please try again.");
     }
-
-    // Close the modal after submission
+  
     setIsModalOpen(false);
   };
 

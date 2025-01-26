@@ -53,14 +53,16 @@ export const ActionDropdown = ({
     try {
       const res = await deleteUser({ isDeleted: true });
       mutate();
-      if (res.isSuccessed) {
-        toast.success("User Deleted successfully!");
+      if (res.status >= 400) {
+        toast.error(res.message || "An error occurred.");
       } else {
-        toast.error("Failed to Delete User.");
+       
+        toast.success(
+          "Delete done successfully"
+        );
       }
     } catch (error) {
       toast.error("An error occurred while deleting user.");
-      console.error("Error:", error);
     } finally {
       setDropdownOpen(false);
     }
@@ -82,11 +84,11 @@ export const ActionDropdown = ({
 
       {dropdownOpen && (
         <div
-          className=" absolute font-nunito -mt-[125px] -ml-10 w-[140px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+          className=" absolute font-nunito  -ml-24 w-[140px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"
-          style={{ position: "fixed", zIndex: "1000" }}
+          style={{ position: "absolute", zIndex: "1000" }}
         >
           <div className="py-1" role="none">
             <button

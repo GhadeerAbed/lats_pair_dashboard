@@ -5,8 +5,6 @@ import { API_SERVICES_URLS } from "@/data/page";
 import { toast } from "sonner";
 import { DeleteIcon, EditIcon, EyeIcon } from "@/lib/@heroicons/page";
 import { useRouter } from "next/navigation";
-import { BigModal } from "@/components/page";
-// import EditUserForm from "../EditUserForm/page";
 
 function useOutsideAlerter(ref: any, setDropdownOpen: any) {
   useEffect(() => {
@@ -26,10 +24,10 @@ function useOutsideAlerter(ref: any, setDropdownOpen: any) {
 export const ActionDropdown1 = ({
   id,
   mutate,
-  userId
+  userId,
 }: {
   id: any;
-  userId:any;
+  userId: any;
   mutate: () => void;
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -41,7 +39,6 @@ export const ActionDropdown1 = ({
     API_SERVICES_URLS.DELATE_USER(id),
     "DELETE"
   );
-
 
   const handleShowDetails = () => {
     setDropdownOpen(false);
@@ -55,10 +52,10 @@ export const ActionDropdown1 = ({
     try {
       const res = await deleteUser({ isDeleted: true });
       mutate();
-      if (res.isSuccessed) {
-        toast.success("User Deleted successfully!");
+      if (res.status >= 400) {
+        toast.error("An error occurred while deleting user.");
       } else {
-        toast.error("Failed to Delete User.");
+        toast.success("Delete done successfully");
       }
     } catch (error) {
       toast.error("An error occurred while deleting user.");
@@ -68,62 +65,58 @@ export const ActionDropdown1 = ({
     }
   };
 
-
   return (
     <>
-    <div className="relative inline-block text-left " ref={dropdownRef}>
-      <div>
-        <button
-          type="button"
-          className="relative inline-flex justify-center w-full  py-2 bg-white font-nunito font-medium text-gray-700  focus:outline-none"
-          onClick={() => setDropdownOpen(!dropdownOpen)}
-        >
-          ...
-        </button>
-      </div>
-
-      {dropdownOpen && (
-        <div
-          className=" absolute font-nunito -mt-[125px] -ml-10 w-[140px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-          role="menu"
-          aria-orientation="vertical"
-          aria-labelledby="menu-button"
-          style={{ position: "fixed", zIndex: "1000" }}
-        >
-          <div className="py-1" role="none">
-            <button
-              onClick={handleShowDetails}
-              className="text-secondary flex gap-2 w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
-              role="menuitem"
-            >
-              <EyeIcon className="w-5 h-5 text-primary" />
-              Show Details
-            </button>
-
-            <button
-              onClick={handleEditUser}
-              className=" flex text-secondary  w-full gap-2 text-left px-4 py-2 text-sm hover:bg-gray-100"
-              role="menuitem"
-            >
-              <EditIcon className="w-5 h-5 text-primary" />
-              Edit
-            </button>
-
-            <button
-              onClick={() => handleUserDelete()}
-              className="text-secondary flex gap-2 w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
-              role="menuitem"
-            >
-              <DeleteIcon className="w-5 h-5 text-primary" />
-              Delete
-            </button>
-          </div>
+      <div className="relative inline-block text-left " ref={dropdownRef}>
+        <div>
+          <button
+            type="button"
+            className="relative inline-flex justify-center w-full  py-2 bg-white font-nunito font-medium text-gray-700  focus:outline-none"
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+          >
+            ...
+          </button>
         </div>
-      )}
-    </div>
-    {/* <BigModal isOpen={isEditModalOpen} closeModal={() => setEditModalOpen(false)}>
-      <EditUserForm id={id} />
-    </BigModal> */}
+
+        {dropdownOpen && (
+          <div
+            className=" absolute font-nunito -ml-24 w-[140px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="menu-button"
+            style={{ position: "absolute", zIndex: "1000" }}
+          >
+            <div className="py-1" role="none">
+              <button
+                onClick={handleShowDetails}
+                className="text-secondary flex gap-2 w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                role="menuitem"
+              >
+                <EyeIcon className="w-5 h-5 text-primary" />
+                Show Details
+              </button>
+
+              <button
+                onClick={handleEditUser}
+                className=" flex text-secondary  w-full gap-2 text-left px-4 py-2 text-sm hover:bg-gray-100"
+                role="menuitem"
+              >
+                <EditIcon className="w-5 h-5 text-primary" />
+                Edit
+              </button>
+
+              <button
+                onClick={() => handleUserDelete()}
+                className="text-secondary flex gap-2 w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+                role="menuitem"
+              >
+                <DeleteIcon className="w-5 h-5 text-primary" />
+                Delete
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </>
   );
 };

@@ -2,10 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { useSWRHook } from "@/hooks/page";
-import { BigModal, Button, Search } from "@/components/page";
+import { Button, Search } from "@/components/page";
 import { ViewIcon } from "@/lib/@heroicons/page";
 import AppointmentTable from "@/features/Dashboard/components/AppointmentTable/page";
-import BookSessionForm from "../BookSessionForm/page";
 import { useRouter } from "next/navigation";
 
 export const ShowAppoitmentTable: React.FC = ({ id }: { id?: any }) => {

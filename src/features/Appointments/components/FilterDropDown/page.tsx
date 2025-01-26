@@ -1,8 +1,6 @@
 "use client";
-import { useAuth } from "@/components/page";
+import { ViewIcon } from "@/lib/@heroicons/page";
 import React, { useState, useRef, useEffect } from "react";
-
-
 
 function useOutsideAlerter(ref: any, setDropdownOpen: any) {
   useEffect(() => {
@@ -18,38 +16,37 @@ function useOutsideAlerter(ref: any, setDropdownOpen: any) {
     };
   }, [ref, setDropdownOpen]);
 }
-export const CompanyDropdown = () => {
+export const FilterDropDown = ({
+  isPaired,
+  setIsPaired,
+}: {
+  isPaired: any;
+  setIsPaired: any;
+}) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const {  logout , userData} = useAuth();
+
   useOutsideAlerter(dropdownRef, setDropdownOpen);
-  const companyName = userData.vendor?.name
 
+  const handleAlonePaired = ()=>{
+    setIsPaired("false")
+    setDropdownOpen(false)
+  }
+  const handlePairPaired = ()=>{
+    setIsPaired("true")
+    setDropdownOpen(true)
+  }
 
-  if (!userData) return null;
   return (
-    <div className="relative inline-block text-left " ref={dropdownRef}>
+    <div className="relative inline-block text-left z-50 " ref={dropdownRef}>
       <div>
         <button
           type="button"
-          className="inline-flex justify-center w-full  py-2  font-Sans font-medium text-gray-700  focus:outline-none capitalize ltr:border-r-2 ltr:pr-2 rtl:border-l-2  rtl:pl-2"
+          className="inline-flex justify-center w-full  py-2  font-Sans font-medium text-primary  focus:outline-none capitalize ltr:border-r-2 ltr:pr-2 rtl:border-l-2  rtl:pl-2"
           onClick={() => setDropdownOpen(!dropdownOpen)}
         >
-          {/* <Image
-            src={team}
-            alt="trust-logo"
-            width={18}
-            height={18}
-            className="mx-3"
-          /> */}
-          <span>{companyName}</span>
-          {/* <Image
-            src={down}
-            alt="trust-logo"
-            width={12}
-            height={12}
-            className="mx-3 mt-[10px]"
-          /> */}
+          <ViewIcon className="w-5 h-5" />
+          <span className="font-medium pl-1">Filter</span>
         </button>
       </div>
 
@@ -61,20 +58,20 @@ export const CompanyDropdown = () => {
           aria-labelledby="menu-button"
         >
           <div className="py-1" role="none">
-            <a
-              href={`/dashboard/profile`}
-              className="text-gray-700 block pl-6 py-2 text-sm hover:bg-gray-100"
+            <button
+              onClick={handleAlonePaired}
+              className="text-gray-700 w-full py-2 text-sm hover:bg-gray-100 cursor-pointer"
               role="menuitem"
             >
-              Profile Details
-            </a>
-            <a
-              onClick={logout}
-              className="text-gray-700 block pl-6 py-2 text-sm hover:bg-gray-100 cursor-pointer"
+              Pair a lone
+            </button>
+            <button
+              onClick={handlePairPaired}
+              className="text-gray-700 w-full py-2 text-sm hover:bg-gray-100 cursor-pointer"
               role="menuitem"
             >
-              Logout
-            </a>
+              Pair with a partner
+            </button>
           </div>
         </div>
       )}
@@ -82,4 +79,4 @@ export const CompanyDropdown = () => {
   );
 };
 
-export default CompanyDropdown;
+export default FilterDropDown;

@@ -25,14 +25,14 @@ const UserProfile = ({ id }: { id: string }) => {
             </h1>
           </div>
           <div className=" flex space-x-4">
-            <Button
+            {/* <Button
               className="border-primary text-primary bg-white"
               onClick={() => {
                 setOpenModal(true);
               }}
             >
               Edit Password
-            </Button>
+            </Button> */}
             <Button
               className=" bg-primary text-white"
               onClick={() => {

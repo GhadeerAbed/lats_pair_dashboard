@@ -6,7 +6,7 @@ import TableList from "./TableList";
 
 export const Users = () => {
   return (
-    <div >
+    <div className="w-[600px] md:w-[800px] lg:w-[1000px]">
       <TableList />
      
     </div>
