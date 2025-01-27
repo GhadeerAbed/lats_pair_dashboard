@@ -67,18 +67,18 @@ const EditAppointment = ({ id }: { id: string }) => {
           <p className="text-gray-700 font-medium mb-2">Select Deleted for (Optional)</p>
           <div className="flex space-x-6">
             <label className="flex items-center space-x-2">
-              <input type="radio" value="RESCHEDULED" {...register("deletedFor")} className="accent-primary" />
-              <span>Rescheduled</span>
-            </label>
-
-            <label className="flex items-center space-x-2">
               <input type="radio" value="CANCELLED" {...register("deletedFor")} className="accent-primary" />
               <span>Cancelled</span>
             </label>
 
             <label className="flex items-center space-x-2">
-              <input type="radio" value="NON_SHOW" {...register("deletedFor")} className="accent-primary" />
-              <span>Non Show</span>
+              <input type="radio"  value="NOSHOW" {...register("deletedFor")} className="accent-primary" />
+              <span>No Show</span>
+            </label>
+
+            <label className="flex items-center space-x-2">
+              <input type="radio" value="NA" {...register("deletedFor")} className="accent-primary" />
+              <span>Not Applicable</span>
             </label>
           </div>
         </div>
