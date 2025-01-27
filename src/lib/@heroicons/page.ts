@@ -10,6 +10,7 @@ import {
   AdjustmentsHorizontalIcon as ViewIcon,
   GlobeAltIcon as GlobalIcon,
   MagnifyingGlassIcon as MagnifyingGlassIconOutline,
+  ArrowRightStartOnRectangleIcon,
 } from "@heroicons/react/20/solid";
 import {
   // UserIcon as UserIcon,
@@ -23,7 +24,8 @@ import {
   CheckCircleIcon as CircleCheck,
   TrashIcon as DeleteIcon,
   PencilSquareIcon as EditIcon,
-  PlusIcon as PlusIcon
+  PlusIcon as PlusIcon,
+  ArrowRightStartOnRectangleIcon as LogIcon
 } from "@heroicons/react/24/outline";
 
 export {
@@ -47,5 +49,6 @@ export {
   SidebarIcon,
   DeleteIcon,
   EditIcon,
-  PlusIcon
+  PlusIcon,
+  LogIcon
 };

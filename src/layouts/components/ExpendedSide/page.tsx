@@ -1,11 +1,12 @@
 "use client";
 import { URL_PATHS } from "../../../data/page";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter} from "next/navigation";
 
 import { ExpendedSideList } from "../page";
 
 import { FC } from "react";
 import {
+  Button,
   CategorySvg,
   CustomerSvg,
   DashSvg,
@@ -14,17 +15,23 @@ import {
   PaymentSvg,
   SettingSvg,
 } from "@/components/page";
+import { LogIcon } from "@/lib/@heroicons/page";
 
 interface ExpendedSideProps {}
 
 export const ExpendedSide: FC<ExpendedSideProps> = ({}) => {
   const pathname = usePathname();
+  const router= useRouter()
 
   const isActive = (path: string, subPaths: string[] = []): boolean => {
     return (
       pathname === path ||
       subPaths.some((subPath) => pathname.startsWith(subPath))
     );
+  };
+  const handleLogout = () => {
+    localStorage.removeItem("authUser");
+    router.push('/');
   };
 
   return (
@@ -48,24 +55,33 @@ export const ExpendedSide: FC<ExpendedSideProps> = ({}) => {
         icon={<PackageSvg />}
         href={`/dashboard/users`}
         isActive={isActive(`/dashboard/users`, [
-          '/dashboard/users/addUsers',
-          '/dashboard/users/addUsersPreferences',
+          "/dashboard/users/addUsers",
+          "/dashboard/users/addUsersPreferences",
         ])}
-       />
+      />
 
       <ExpendedSideList
         title={"Blogs"}
         icon={<OrderSvg />}
         href={`/dashboard/blogs`}
-        isActive={isActive(`/dashboard/blogs`, ['/dashboard/blogs/addBlogs'])}
+        isActive={isActive(`/dashboard/blogs`, ["/dashboard/blogs/addBlogs"])}
       />
-      
+
       <ExpendedSideList
         title={"Setting"}
         icon={<SettingSvg />}
         href={`/dashboard/setting`}
         isActive={isActive(`/dashboard/setting`, [])}
       />
+      <button
+        className="bg-white text-red-500 border-none text-lg pl-3 flex items-center gap-2 cursor-pointer "
+        onClick={ 
+          handleLogout
+        }
+      >
+        <LogIcon className="w-6 h-6" />
+        <span>Logout</span>
+      </button>
     </ul>
   );
 };
