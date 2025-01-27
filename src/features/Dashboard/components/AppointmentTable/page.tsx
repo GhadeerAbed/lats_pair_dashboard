@@ -5,8 +5,6 @@ import { TableProps } from "@/types/page";
 import { Table } from "@/features/Setting/components/Table/page";
 import { ActionDropdown1 } from "@/features/Appointments/components/page";
 
-
-
 export const AppointmentTable: React.FC<{
   leadResponseData: any;
   isLoadingLeads: boolean;
@@ -29,8 +27,26 @@ export const AppointmentTable: React.FC<{
     { id: "Name", Header: "Name", accessor: "Name" },
     { id: "startTime", Header: "Start Time", accessor: "startTime" },
     { id: "endTime", Header: "End Time", accessor: "endTime" },
-    { id: "paymentStatus", Header: "Payment Status", accessor: "paymentStatus" },
-    { id: "isPaired", Header: "Is Paired", accessor: "isPaired" },
+    {
+      id: "paymentStatus",
+      Header: "Payment Status",
+      accessor: "paymentStatus",
+      Cell: ({ value }) => (
+        <span className={value === "PAID" ? "text-green-500" : "text-red-500"}>
+          {value}
+        </span>
+      ),
+    },
+    {
+      id: "isPaired",
+      Header: "Is Paired",
+      accessor: "isPaired",
+      Cell: ({ value }) => (
+        <span className={value ? "text-green-500" : "text-red-500"}>
+          {value ? "True" : "False"}
+        </span>
+      ),
+    },
     {
       id: "action",
       Header: "Action",
@@ -38,9 +54,9 @@ export const AppointmentTable: React.FC<{
       Cell: ({ row }) => {
         return (
           <ActionDropdown1
-            userId={row.original.userId} 
+            userId={row.original.userId}
             id={row.original.ID}
-            mutate={mutate} 
+            mutate={mutate}
           />
         );
       },
@@ -49,17 +65,15 @@ export const AppointmentTable: React.FC<{
 
   useEffect(() => {
     if (leadResponseData) {
-     
-
       // Map the response to the desired table format
       const mappedData = leadResponseData.map((product: any) => ({
         userId: product.id,
         ID: product.userId,
         Name: product.user.name,
-        startTime: product.startTime ,
+        startTime: product.startTime,
         endTime: product.endTime,
         paymentStatus: product.paymentStatus,
-        isPaired: product.isPaired?"true":"false",
+        isPaired: product.isPaired, // Keep it as a boolean for conditional rendering
         action: "action",
       }));
 
@@ -80,7 +94,7 @@ export const AppointmentTable: React.FC<{
 
   return (
     <div>
-      <div className=" rounded-[15px] mt-2 ">
+      <div className="rounded-[15px] mt-2">
         {isLoadingLeads ? (
           <div className="flex justify-center items-center py-3">
             <p>Data is Loading...</p>
