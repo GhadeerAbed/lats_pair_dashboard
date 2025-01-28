@@ -68,7 +68,7 @@ const BookSessionForm = ({ id, onSubmit }: BookSessionFormProps) => {
           type="submit"
           className="bg-blue-500 text-white py-2 rounded-md mx-auto"
         >
-          {sessionType === "ALONE" ? "Booking..." : "Next"}
+          {sessionType === "ALONE" ? "Book Now" : "Next"}
         </Button>
       </form>
     </div>

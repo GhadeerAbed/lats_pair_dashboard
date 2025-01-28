@@ -108,11 +108,11 @@ export const EditSetting = () => {
           type="text"
           {...register("duration")}
         />
-        <Input
+        {/* <Input
           label="Session Cost / $"
           type="text"
           {...register("sessionCost")}
-        />
+        /> */}
       </div>
 
       <Button
