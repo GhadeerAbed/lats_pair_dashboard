@@ -2,6 +2,7 @@
 
 import { API_SERVICES_URLS } from "@/data/page";
 import { useSWRMutationHook } from "@/hooks/page";
+import { useState } from "react";
 
 interface TimeSlotProps {
   time: string;
@@ -24,7 +25,7 @@ const TimeSlote = ({
   pairedAppointmentId,
 }: TimeSlotProps) => {
   const { totalBooked, userBooked } = availability;
-  console.log(availability);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const { customTrigger: reschedule, isMutating: isRescheduling } =
     useSWRMutationHook(API_SERVICES_URLS.APPOINTMENT_RESCHEDULE(id), "PATCH");
@@ -42,13 +43,13 @@ const TimeSlote = ({
 
   const handleClick = async () => {
     if (userBooked) return;
+    setSelectedId(id); // Set selected time slot
 
     const startTime = time;
     const endTime = `${parseInt(time.split(":")[0]) + 1}:00`; // Assuming 1-hour duration
     const duration = 60;
 
-    if (IsPaired === true) {
-      // Call reschedulePair API for paired bookings
+    if (IsPaired) {
       await reschedulePair({
         appointmentId1: id,
         appointmentId2: pairedAppointmentId,
@@ -58,7 +59,6 @@ const TimeSlote = ({
         date,
       });
     } else {
-      // Call reschedule API for single booking
       await reschedule({
         startTime,
         endTime,
@@ -74,7 +74,9 @@ const TimeSlote = ({
       tabIndex={0}
       aria-label={`Select time slot at ${formatTime(time)}`}
       role="button"
-      className={`flex items-center rounded-lg shadow-md overflow-hidden w-full cursor-pointer`}
+      className={`flex items-center rounded-lg shadow-md overflow-hidden w-full cursor-pointer border-2 ${
+        selectedId === id ? "border-blue-500" : "border-transparent"
+      }`}
     >
       <div
         className={`${
