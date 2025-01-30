@@ -24,7 +24,7 @@ export const TableList: React.FC<{ formattedDate: string }> = ({
       limit: number = DEFAULT_PAGE_SIZE,
       isPaired?: string
     ) => {
-      let url = `/appointment?page=${page}&limit=${limit}&date=${formattedDate}&searchkey=name`;
+      let url = `/appointment?page=${page}&limit=${limit}&date=${formattedDate}`;
       if (search) url += `&search=${encodeURIComponent(search)}`;
       if (isPaired) url += `&isPaired=${isPaired}`;
       return url;

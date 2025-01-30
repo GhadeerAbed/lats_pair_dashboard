@@ -5,6 +5,8 @@ import { API_SERVICES_URLS } from "@/data/page";
 import { toast } from "sonner";
 import { DeleteIcon, EditIcon, EyeIcon } from "@/lib/@heroicons/page";
 import { useRouter } from "next/navigation";
+import { BigModal } from "@/components/page";
+import EditAppointment from "../EditAppointment/page";
 
 function useOutsideAlerter(ref: any, setDropdownOpen: any) {
   useEffect(() => {
@@ -117,6 +119,9 @@ export const ActionDropdown1 = ({
           </div>
         )}
       </div>
+      <BigModal isOpen={isEditModalOpen} closeModal={()=>setEditModalOpen(false)}>
+      <EditAppointment id={id}/>
+    </BigModal>
     </>
   );
 };

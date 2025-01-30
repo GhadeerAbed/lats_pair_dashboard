@@ -6,10 +6,12 @@ import { Button, Search } from "@/components/page";
 import { ViewIcon } from "@/lib/@heroicons/page";
 import AppointmentTable from "@/features/Dashboard/components/AppointmentTable/page";
 import { useRouter } from "next/navigation";
+import FilterDropDown from "@/features/Appointments/components/FilterDropDown/page";
 
 export const ShowAppoitmentTable: React.FC = ({ id }: { id?: any }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isPaired, setIsPaired] = useState<string>("");
 
   const DEFAULT_PAGE_SIZE = 10;
   const router = useRouter()
@@ -20,9 +22,10 @@ export const ShowAppoitmentTable: React.FC = ({ id }: { id?: any }) => {
       search: string,
       limit: number = DEFAULT_PAGE_SIZE
     ) => {
-      return `/appointment?page=${page}&limit=${limit}&searchkey=name${
-        search ? `&search=${encodeURIComponent(search)}` : ""
-      }`;
+      let url = `/appointment?page=${page}&limit=${limit}`;
+      if (search) url += `&search=${encodeURIComponent(search)}`;
+      if (isPaired) url += `&isPaired=${isPaired}`;
+      return url;
     },
   };
 
@@ -41,20 +44,9 @@ export const ShowAppoitmentTable: React.FC = ({ id }: { id?: any }) => {
   return (
     <>
       <div className="bg-white rounded-[15px] w-full p-4 my-10 shadow-md">
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between gap-4 items-center mb-4">
           <Search setSearch={setSearchTerm} />
-          <div className="flex gap-2">
-            <Button className="text-primary bg-white border-none flex">
-              <ViewIcon className="w-5 h-5" />
-              <span className="font-medium pl-1">Filter</span>
-            </Button>
-            <Button
-              className="bg-primary text-white px-6 py-2"
-              onClick={()=>router.push(`/dashboard/users/${id}/booking`)}
-            >
-              Book Now
-            </Button>
-          </div>
+          <FilterDropDown isPaired={isPaired} setIsPaired={setIsPaired} />
         </div>
         <AppointmentTable
           leadResponseData={leadResponseData}

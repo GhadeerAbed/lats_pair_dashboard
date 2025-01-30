@@ -63,10 +63,10 @@ export const ShowSetting = () => {
                 <p>{userSettings.duration}</p>
               </div>
               {/* Optional field: Add default or fallback value if not provided */}
-              <div>
+              {/* <div>
                 <p className="pb-2 uppercase">Session Cost</p>
                 <p>{userSettings.sessionCost || "Not Set"}</p>
-              </div>
+              </div> */}
             </div>
           ) : (
             <p>No settings found.</p>

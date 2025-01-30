@@ -6,10 +6,12 @@ import { UserTable } from "./components/page";
 import { Button, Search } from "@/components/page";
 import { ViewIcon } from "@/lib/@heroicons/page";
 import { useRouter } from "next/navigation";
+import FilterDropDown from "../Appointments/components/FilterDropDown/page";
 
 export const TableList: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isPaired, setIsPaired] = useState<string>("");
   const DEFAULT_PAGE_SIZE = 10;
   const router = useRouter();
   const API_SERVICES_URLS = {
@@ -18,10 +20,10 @@ export const TableList: React.FC = () => {
       search: string,
       limit: number = DEFAULT_PAGE_SIZE
     ) => {
-      const searchKey = search.includes("@") ? "email" : "name";
-      return `/users?page=${page}&limit=${limit}&searchkey=${searchKey}${
-        search ? `&search=${encodeURIComponent(search)}` : ""
-      }`;
+      let url = `/users?page=${page}&limit=${limit}`;
+      if (search) url += `&search=${encodeURIComponent(search)}`;
+      if (isPaired) url += `&isPaired=${isPaired}`;
+      return url;
     },
   };
 
@@ -41,23 +43,9 @@ export const TableList: React.FC = () => {
 
   return (
     <div className="bg-white rounded-[15px] w-full p-4">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between gap-4 items-center mb-4">
         <Search setSearch={setSearchTerm} />
-        <div className="flex gap-2">
-          <Button
-            className="text-primary bg-white border-none flex"
-            onClick={() => console.log("Filter clicked")}
-          >
-            <ViewIcon className="w-5 h-5" />
-            <span className="font-medium pl-1">Filter</span>
-          </Button>
-          <Button
-            className="bg-primary text-white px-6 py-2"
-            onClick={handleAddUser}
-          >
-            Add User
-          </Button>
-        </div>
+        <FilterDropDown isPaired={isPaired} setIsPaired={setIsPaired} />
       </div>
       <UserTable
         leadResponseData={leadResponseData}

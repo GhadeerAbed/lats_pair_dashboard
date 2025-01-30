@@ -44,21 +44,18 @@ export const BookingCalendar = ({ id }: { id?: any }) => {
     isBefore(startDate, today) || isSameDay(startDate, today);
 
   const formattedDate = format(selectedDate, "dd-MM-yyyy");
+  const App_id = localStorage.getItem("APP_Id");
 
   // Ensure API URL is only set when id is present
-  const apiUrl = id
-    ? `${
-        API_SERVICES_URLS.GET_AVAILABILITY_APPOINTMENT
-      }?date=${encodeURIComponent(formattedDate)}&userId=${localStorage.getItem(
-        "APP_Id"
-      )}`
-    : null;
+  const apiUrl =
+    id &&
+    `${
+      API_SERVICES_URLS.GET_AVAILABILITY_APPOINTMENT
+    }?date=${encodeURIComponent(formattedDate)}&userId=${App_id}`;
 
   const { data } = useSWRHook(apiUrl);
 
   const { data: slotData } = useSWRHook(API_SERVICES_URLS.GET_APPOINTMENT(id));
-
-
 
   return (
     <div className="flex flex-col text-sm lg:text-base py-6">
