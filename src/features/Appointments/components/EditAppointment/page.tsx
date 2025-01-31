@@ -2,6 +2,7 @@ import { API_SERVICES_URLS } from "@/data/page";
 import { useSWRMutationHook } from "@/hooks/page";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const EditAppointment = ({ id }: { id: string }) => {
   const {
@@ -28,24 +29,29 @@ const EditAppointment = ({ id }: { id: string }) => {
 
   const onSubmit = async (data: any) => {
     console.log("Final Submitted Data:", data);
-  
+
     const payload: any = {
       paymentStatus: data.paymentStatus || "UNPAID", // ✅ Ensures it's always sent
     };
-  
+
     // ✅ Only add `deletedFor` if selected
     if (data.deletedFor) {
       payload.deletedFor = data.deletedFor;
     }
-  
+
     try {
-      await updateSession(payload);
-      console.log("Session updated successfully:", payload);
+      const res = await updateSession(payload);
+      if (res.status >= 400) {
+        toast.error(
+          res.message || "An error occurred while updating the session."
+        );
+      } else {
+        toast.success("Session updated successfully!");
+      }
     } catch (error) {
       console.error("Error updating session:", error);
     }
   };
-  
 
   return (
     <div className="mx-auto bg-white p-6">
