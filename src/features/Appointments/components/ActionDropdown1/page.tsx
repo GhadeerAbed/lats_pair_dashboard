@@ -120,7 +120,7 @@ export const ActionDropdown1 = ({
         )}
       </div>
       <BigModal isOpen={isEditModalOpen} closeModal={()=>setEditModalOpen(false)}>
-      <EditAppointment id={id}/>
+      <EditAppointment id={userId}/>
     </BigModal>
     </>
   );

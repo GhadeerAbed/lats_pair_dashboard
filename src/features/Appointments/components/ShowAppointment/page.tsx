@@ -12,7 +12,6 @@ export const ShowAppointment = ({ id }: { id: string }) => {
   const { data } = useSWRHook(API_SERVICES_URLS.GET_APPOINTMENT(id));
   if (data){
     localStorage.setItem("APP_Id", data.user.id)
-
   }
  
   if (!data) return <p>Loading...</p>;

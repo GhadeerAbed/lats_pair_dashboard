@@ -7,19 +7,37 @@ const EditAppointment = ({ id }: { id: string }) => {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue, // ✅ Ensures correct state updates
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      paymentStatus: "UNPAID", // ✅ Ensures paymentStatus starts correctly
+      deletedFor: null, // ✅ Prevents null issues
+    },
+  });
+
   const { customTrigger: updateSession, isMutating } = useSWRMutationHook(
     API_SERVICES_URLS.UPDATE_SESSION(id),
     "PATCH"
   );
 
+  // ✅ Watch for form changes (debugging)
+  const formValues = watch();
+  console.log("Form Values:", formValues);
+
   const onSubmit = async (data: any) => {
-    const payload: any = { paymentStatus: data.paymentStatus };
+    console.log("Final Submitted Data:", data);
+  
+    const payload: any = {
+      paymentStatus: data.paymentStatus || "UNPAID", // ✅ Ensures it's always sent
+    };
+  
+    // ✅ Only add `deletedFor` if selected
     if (data.deletedFor) {
       payload.deletedFor = data.deletedFor;
     }
-
+  
     try {
       await updateSession(payload);
       console.log("Session updated successfully:", payload);
@@ -27,21 +45,25 @@ const EditAppointment = ({ id }: { id: string }) => {
       console.error("Error updating session:", error);
     }
   };
+  
 
   return (
-    <div className=" mx-auto bg-white p-6 ">
+    <div className="mx-auto bg-white p-6">
       <h2 className="text-xl font-semibold mb-6">Edit Appointment Session</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        {/* Payment Status */}
+        {/* ✅ Payment Status */}
         <div>
-          <p className="text-gray-700 font-medium mb-2">Select Payment Status</p>
+          <p className="text-gray-700 font-medium mb-2">
+            Select Payment Status
+          </p>
           <div className="flex space-x-6">
             <label className="flex items-center space-x-2">
               <input
                 type="radio"
                 value="PAID"
                 {...register("paymentStatus")}
+                onChange={(e) => setValue("paymentStatus", e.target.value)} // ✅ Ensures correct updates
                 className="accent-blue-600"
               />
               <span>Paid</span>
@@ -52,38 +74,61 @@ const EditAppointment = ({ id }: { id: string }) => {
                 type="radio"
                 value="UNPAID"
                 {...register("paymentStatus")}
+                onChange={(e) => setValue("paymentStatus", e.target.value)} // ✅ Fix for reset issue
                 className="accent-primary"
               />
               <span>Unpaid</span>
             </label>
           </div>
           {errors.paymentStatus && (
-            <p className="text-red-500 text-sm">{errors.paymentStatus.message}</p>
+            <p className="text-red-500 text-sm">
+              {errors.paymentStatus.message}
+            </p>
           )}
         </div>
 
-        {/* Deleted For (Optional) */}
+        {/* ✅ Deleted For (Optional) */}
         <div>
-          <p className="text-gray-700 font-medium mb-2">Select Deleted for (Optional)</p>
+          <p className="text-gray-700 font-medium mb-2">
+            Select Deleted for (Optional)
+          </p>
           <div className="flex space-x-6">
             <label className="flex items-center space-x-2">
-              <input type="radio" value="CANCELLED" {...register("deletedFor")} className="accent-primary" />
+              <input
+                type="radio"
+                value="CANCELLED"
+                {...register("deletedFor")}
+                onChange={(e) => setValue("deletedFor", e.target.value)} // ✅ Prevents resetting paymentStatus
+                className="accent-primary"
+              />
               <span>Cancelled</span>
             </label>
 
             <label className="flex items-center space-x-2">
-              <input type="radio"  value="NOSHOW" {...register("deletedFor")} className="accent-primary" />
+              <input
+                type="radio"
+                value="NOSHOW"
+                {...register("deletedFor")}
+                onChange={(e) => setValue("deletedFor", e.target.value)} // ✅ Prevents issue
+                className="accent-primary"
+              />
               <span>No Show</span>
             </label>
 
             <label className="flex items-center space-x-2">
-              <input type="radio" value="NA" {...register("deletedFor")} className="accent-primary" />
+              <input
+                type="radio"
+                value="NA"
+                {...register("deletedFor")}
+                onChange={(e) => setValue("deletedFor", e.target.value)}
+                className="accent-primary"
+              />
               <span>Not Applicable</span>
             </label>
           </div>
         </div>
 
-        {/* Submit Button */}
+        {/* ✅ Submit Button */}
         <button
           type="submit"
           disabled={isMutating}
