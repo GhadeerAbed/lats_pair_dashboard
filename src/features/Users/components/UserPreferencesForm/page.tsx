@@ -34,8 +34,8 @@ const PartnerSkillLevels = [
   { value: "CREATOR", name: "Creator" },
 ];
 
-const UserPreferencesForm = ({ isEdit = false }: { isEdit?: boolean }) => {
-  const id = localStorage.getItem("userIdPref");
+const UserPreferencesForm = ({ isEdit = false , userId }: { isEdit?: boolean ,userId?:any }) => {
+  // const id = localStorage.getItem("userIdPref");
 
   const {
     handleSubmit,
@@ -59,13 +59,13 @@ const UserPreferencesForm = ({ isEdit = false }: { isEdit?: boolean }) => {
   );
 
   const { customTrigger: updateTrigger, isMutating: isUpdateMutating } =
-    useSWRMutationHook(API_SERVICES_URLS.UPDATE_USER_PREF(id), "PATCH");
+    useSWRMutationHook(API_SERVICES_URLS.UPDATE_USER_PREF(userId), "PATCH");
 
   const {
     data: user,
     error: userError,
     isLoading: isUserLoading,
-  } = useSWRHook(isEdit ? API_SERVICES_URLS.GET_REF_USER_ID(id) : null);
+  } = useSWRHook(isEdit ? API_SERVICES_URLS.GET_REF_USER_ID(userId) : null);
 
   // Populate form with initial data if in edit mode
   useEffect(() => {

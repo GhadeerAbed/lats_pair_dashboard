@@ -75,7 +75,7 @@ export const CategorySvg = (props: any) => {
       />
       <path
         fillRule="evenodd"
-        clip-rule="evenodd"
+        clipRule="evenodd"
         d="M16.2383 4.0791H7.77096C4.83427 4.0791 3 5.71504 3 8.72213V17.7718C3 20.8261 4.83427 22.4999 7.77096 22.4999H16.229C19.175 22.4999 21 20.8545 21 17.8474V8.72213C21.0092 5.71504 19.1842 4.0791 16.2383 4.0791Z"
         stroke="currentColor"
         strokeWidth="1.5"

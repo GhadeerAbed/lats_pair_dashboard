@@ -55,7 +55,7 @@ const UserPrefProfile = ({ id }: { id: string }) => {
         </div>
       </div>
       <BigModal isOpen={openModal} closeModal={() => setOpenModal(false)}>
-        <UserPreferencesForm isEdit={true} />
+        <UserPreferencesForm isEdit={true} userId={user?.id}/>
       </BigModal>
     </>
   );
