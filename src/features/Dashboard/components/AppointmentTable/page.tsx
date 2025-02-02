@@ -80,7 +80,7 @@ export const AppointmentTable: React.FC<{
       setTableData(mappedData);
 
       const totalItems = leadResponseData.length;
-      setTotalPages(Math.ceil(totalItems / 10));
+      setTotalPages(Math.ceil(totalItems / 1));
       setTotalEntries(totalItems);
     }
   }, [leadResponseData]);
