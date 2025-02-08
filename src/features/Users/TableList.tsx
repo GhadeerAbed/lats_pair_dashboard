@@ -31,11 +31,11 @@ export const TableList: React.FC = () => {
     data: leadResponseData,
     isLoading: isLoadingLeads,
     mutate,
-  } = useSWRHook(API_SERVICES_URLS.GET_Products_LIST(currentPage, searchTerm));
+  } = useSWRHook(API_SERVICES_URLS.GET_Products_LIST(currentPage, searchTerm ,DEFAULT_PAGE_SIZE));
 
   useEffect(() => {
     mutate();
-  }, [currentPage, searchTerm, mutate]);
+  }, [currentPage, searchTerm, mutate ,DEFAULT_PAGE_SIZE]);
 
   const handleAddUser = () => {
     router.push("/dashboard/users/addUsers");
@@ -45,6 +45,12 @@ export const TableList: React.FC = () => {
     <div className="bg-white rounded-[15px] w-full p-4">
       <div className="flex justify-between gap-4 items-center mb-4">
         <Search setSearch={setSearchTerm} />
+        <Button
+          className="bg-primary text-white px-6 py-2"
+          onClick={handleAddUser}
+        >
+          Add User
+        </Button>
         <FilterDropDown isPaired={isPaired} setIsPaired={setIsPaired} />
       </div>
       <UserTable

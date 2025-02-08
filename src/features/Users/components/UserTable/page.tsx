@@ -42,7 +42,7 @@ export const UserTable: React.FC<{
       },
     },
   ];
-
+console.log(leadResponseData?.length)
   useEffect(() => {
     if (leadResponseData) {
      
@@ -58,7 +58,8 @@ export const UserTable: React.FC<{
       setTableData(mappedData);
 
       const totalItems = leadResponseData.length;
-      setTotalPages(Math.ceil(totalItems / 1));
+      setTotalPages(Math.max(1, Math.ceil(totalItems / 5)));
+
       setTotalEntries(totalItems);
     }
   }, [leadResponseData]);

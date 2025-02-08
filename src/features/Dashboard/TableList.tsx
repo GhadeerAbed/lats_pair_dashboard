@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useSWRHook } from "@/hooks/page";
-import { Button, Search } from "@/components/page";
+import {  Search } from "@/components/page";
 
 import AppointmentTable from "./components/AppointmentTable/page";
 import FilterDropDown from "../Appointments/components/FilterDropDown/page";
@@ -46,7 +46,7 @@ export const TableList: React.FC<{ formattedDate: string }> = ({
 
   useEffect(() => {
     mutate();
-  }, [currentPage, searchTerm, isPaired, mutate]);
+  }, [currentPage, searchTerm, isPaired, mutate,DEFAULT_PAGE_SIZE]);
 
   return (
     <div className="bg-white rounded-[15px] p-4 relative w-[600px] md:w-[800px] lg:w-[1000px]">
