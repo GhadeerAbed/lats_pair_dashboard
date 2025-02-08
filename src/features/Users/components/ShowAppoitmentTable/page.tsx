@@ -6,22 +6,22 @@ import { Button, Search } from "@/components/page";
 import AppointmentTable from "@/features/Dashboard/components/AppointmentTable/page";
 import { useRouter } from "next/navigation";
 import FilterDropDown from "@/features/Appointments/components/FilterDropDown/page";
+import { API_SERVICES_URLS } from "@/data/page";
 
 export const ShowAppointmentTable: React.FC<{ id?: any }> = ({ id }) => {
-  const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [isPaired, setIsPaired] = useState<string>("");
 
-  const DEFAULT_PAGE_SIZE = 10;
   const router = useRouter();
 
-  const API_SERVICES_URLS = {
+  const { data: user } = useSWRHook(API_SERVICES_URLS.USERPREF(id));
+    const user_id = user?.id
+
+  const API_SERVICES_URLS1 = {
     GET_APPOINTMENTS_LIST: (
-      page: number,
       search: string,
-      limit: number = DEFAULT_PAGE_SIZE
     ) => {
-      let url = `/appointment?page=${page}&limit=${limit}`;
+      let url = `/appointment/${user_id}`;
       if (search) url += `&search=${encodeURIComponent(search)}`;
       if (isPaired) url += `&isPaired=${isPaired}`;
       return url;
@@ -33,11 +33,11 @@ export const ShowAppointmentTable: React.FC<{ id?: any }> = ({ id }) => {
     data: leadResponseData,
     isLoading: isLoadingLeads,
     mutate,
-  } = useSWRHook(API_SERVICES_URLS.GET_APPOINTMENTS_LIST(currentPage, searchTerm, DEFAULT_PAGE_SIZE));
+  } = useSWRHook(API_SERVICES_URLS1.GET_APPOINTMENTS_LIST( searchTerm));
 
   useEffect(() => {
     mutate();
-  }, [currentPage, searchTerm, isPaired, id]); // ✅ Correct dependencies
+  }, [searchTerm, isPaired, id]); // ✅ Correct dependencies
 
   return (
     <div className="bg-white rounded-[15px] w-full p-4 my-10 shadow-md">
@@ -54,8 +54,6 @@ export const ShowAppointmentTable: React.FC<{ id?: any }> = ({ id }) => {
       <AppointmentTable
         leadResponseData={leadResponseData}
         isLoadingLeads={isLoadingLeads}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
         mutate={mutate}
       />
     </div>

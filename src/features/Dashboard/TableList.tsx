@@ -2,29 +2,18 @@
 
 import React, { useEffect, useState } from "react";
 import { useSWRHook } from "@/hooks/page";
-import {  Search } from "@/components/page";
+import { Search } from "@/components/page";
 
 import AppointmentTable from "./components/AppointmentTable/page";
 import FilterDropDown from "../Appointments/components/FilterDropDown/page";
 
-export const TableList: React.FC<{ formattedDate: string }> = ({
-  formattedDate,
-}) => {
-  const [currentPage, setCurrentPage] = useState(0);
+export const TableList: React.FC<{ formattedDate: string }> = ({ formattedDate }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isPaired, setIsPaired] = useState<string>(""); // Empty = No filter
 
-
-  const DEFAULT_PAGE_SIZE = 10;
-
   const API_SERVICES_URLS = {
-    GET_Products_LIST: (
-      page: number,
-      search: string,
-      limit: number = DEFAULT_PAGE_SIZE,
-      isPaired?: string
-    ) => {
-      let url = `/appointment?page=${page}&limit=${limit}&date=${formattedDate}`;
+    GET_Products_LIST: (search: string, isPaired?: string) => {
+      let url = `/appointment?limit=100&date=${formattedDate}`;
       if (search) url += `&search=${encodeURIComponent(search)}`;
       if (isPaired) url += `&isPaired=${isPaired}`;
       return url;
@@ -35,18 +24,11 @@ export const TableList: React.FC<{ formattedDate: string }> = ({
     data: leadResponseData,
     isLoading: isLoadingLeads,
     mutate,
-  } = useSWRHook(
-    API_SERVICES_URLS.GET_Products_LIST(
-      currentPage,
-      searchTerm,
-      DEFAULT_PAGE_SIZE,
-      isPaired
-    )
-  );
+  } = useSWRHook(API_SERVICES_URLS.GET_Products_LIST(searchTerm, isPaired));
 
   useEffect(() => {
     mutate();
-  }, [currentPage, searchTerm, isPaired, mutate,DEFAULT_PAGE_SIZE]);
+  }, [searchTerm, isPaired, mutate]);
 
   return (
     <div className="bg-white rounded-[15px] p-4 relative w-[600px] md:w-[800px] lg:w-[1000px]">
@@ -58,8 +40,6 @@ export const TableList: React.FC<{ formattedDate: string }> = ({
       <AppointmentTable
         leadResponseData={leadResponseData}
         isLoadingLeads={isLoadingLeads}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
         mutate={mutate}
       />
     </div>

@@ -8,17 +8,14 @@ import ActionDropdown from "../ActionDropdown/page";
 export const UserTable: React.FC<{
   leadResponseData: any;
   isLoadingLeads: boolean;
-  setCurrentPage: any;
-  currentPage: number;
+
   mutate: any;
 }> = ({
   leadResponseData,
   isLoadingLeads,
-  setCurrentPage,
-  currentPage,
+
   mutate,
 }) => {
-  const [totalPages, setTotalPages] = useState(1);
   const [totalEntries, setTotalEntries] = useState(0);
   const [tableData, setTableData] = useState<TableProps[]>([]);
 
@@ -42,10 +39,9 @@ export const UserTable: React.FC<{
       },
     },
   ];
-console.log(leadResponseData?.length)
+
   useEffect(() => {
     if (leadResponseData) {
-     
       const mappedData = leadResponseData.map((product: any) => ({
         ID: product.id,
         Name: product.name,
@@ -57,16 +53,10 @@ console.log(leadResponseData?.length)
 
       setTableData(mappedData);
 
-      const totalItems = leadResponseData.length;
-      setTotalPages(Math.max(1, Math.ceil(totalItems / 5)));
-
-      setTotalEntries(totalItems);
+      setTotalEntries(mappedData.length);
     }
   }, [leadResponseData]);
 
-  const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage);
-  };
 
   const areColumnsAndDataReady =
     fixedColumns.length > 0 && tableData.length > 0;
@@ -83,9 +73,6 @@ console.log(leadResponseData?.length)
             columns={fixedColumns}
             data={tableData}
             showCheckboxes={true}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
             totalEntries={totalEntries}
           />
         ) : (

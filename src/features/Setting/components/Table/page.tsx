@@ -1,15 +1,13 @@
+
 import React from "react";
 import { useTable, useRowSelect, Column, Row, TableOptions } from "react-table";
-import { Checkbox, Pagination } from "../../../../components/page";
+import { Checkbox } from "../../../../components/page";
 import { TableProps } from "../../../../types/page";
 
 export const Table: React.FC<{
   columns: Column<TableProps>[];
   data: TableProps[];
   showCheckboxes?: boolean;
-  currentPage?: number;
-  totalPages?: number;
-  onPageChange?: (page: number) => void;
   totalEntries?: number;
   className?: string;
   onRowClick?: (row: TableProps) => void;
@@ -17,9 +15,6 @@ export const Table: React.FC<{
   columns,
   data,
   showCheckboxes = true,
-  currentPage = 1,
-  totalPages = 0,
-  onPageChange,
   totalEntries = 0,
   className,
   onRowClick,
@@ -60,7 +55,7 @@ export const Table: React.FC<{
   );
 
   return (
-    <div className={`flex flex-col bg-white  rounded-md  font-Sans ${className}`}>
+    <div className={`flex flex-col bg-white rounded-md font-Sans ${className}`}>
       {totalEntries === 0 ? (
         <div className="text-center bg-white text-[#1D1D1D] font-[500] text-[15px] py-5">
           No data found
@@ -68,22 +63,17 @@ export const Table: React.FC<{
       ) : (
         <>
           <div className="z-0">
-            <div className="overflow-x-auto  ">
+            <div className="overflow-x-auto">
               <table {...getTableProps()} style={{ width: "100%" }}>
                 <thead>
                   {headerGroups.map((headerGroup) => (
-                    <tr
-                      {...headerGroup.getHeaderGroupProps()}
-                      key={headerGroup.id}
-                    >
+                    <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
                       {headerGroup.headers.map((column, i) => (
                         <th
                           {...column.getHeaderProps()}
                           key={column.id}
                           className={`text-[#1D1D1D] font-[500] text-[15px] whitespace-nowrap ${
-                            i < 2
-                              ? `sticky left-0 z-1 sticky-column-${i} whitespace-nowrap`
-                              : ""
+                            i < 2 ? `sticky left-0 z-1 sticky-column-${i} whitespace-nowrap` : ""
                           }`}
                         >
                           <span className="flex flex-row items-center justify-center">
@@ -98,32 +88,19 @@ export const Table: React.FC<{
                   {rows.map((row) => {
                     prepareRow(row);
                     return (
-                      <tr
-                        {...row.getRowProps()}
-                        key={row.id}
-                        
-                      >
+                      <tr {...row.getRowProps()} key={row.id}>
                         {row.cells.map((cell, i) => (
                           <td
                             {...cell.getCellProps()}
                             key={cell.column.id}
                             className={`${
-                              i < 2
-                                ? `sticky left-0 bg-white z-1 sticky-column-${i} whitespace-nowrap`
-                                : ""
+                              i < 2 ? `sticky left-0 bg-white z-1 sticky-column-${i} whitespace-nowrap` : ""
                             } text-fontColor1 text-[15px] font-[500] cursor-pointer`}
-                            // Conditionally add onClick only for the first two columns (you can adjust the condition)
                             onClick={
-                              i < row.cells.length - 1 
-                                ? () => onRowClick?.(row.original)
-                                : undefined
+                              i < row.cells.length - 1 ? () => onRowClick?.(row.original) : undefined
                             }
                           >
-                            <span
-                              className={`flex justify-center whitespace-nowrap ${
-                                cell.column.className || ""
-                              }`}
-                            >
+                            <span className={`flex justify-center whitespace-nowrap ${cell.column.className || ""}`}>
                               {cell.render("Cell")}
                             </span>
                           </td>
@@ -133,16 +110,6 @@ export const Table: React.FC<{
                   })}
                 </tbody>
               </table>
-              {totalPages > 1 && (
-                <div className="flex justify-between items-center px-10 pt-3 mb-5">
-                  <div></div>
-                  <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={onPageChange}
-                  />
-                </div>
-              )}
             </div>
           </div>
         </>

@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import { Column } from "react-table";
 import { TableProps } from "@/types/page";
@@ -8,17 +9,8 @@ import { ActionDropdown1 } from "@/features/Appointments/components/page";
 export const AppointmentTable: React.FC<{
   leadResponseData: any;
   isLoadingLeads: boolean;
-  setCurrentPage: any;
-  currentPage: number;
   mutate: any;
-}> = ({
-  leadResponseData,
-  isLoadingLeads,
-  setCurrentPage,
-  currentPage,
-  mutate,
-}) => {
-  const [totalPages, setTotalPages] = useState(1);
+}> = ({ leadResponseData, isLoadingLeads, mutate }) => {
   const [totalEntries, setTotalEntries] = useState(0);
   const [tableData, setTableData] = useState<TableProps[]>([]);
 
@@ -65,7 +57,6 @@ export const AppointmentTable: React.FC<{
 
   useEffect(() => {
     if (leadResponseData) {
-      // Map the response to the desired table format
       const mappedData = leadResponseData.map((product: any) => ({
         userId: product.id,
         ID: product.userId,
@@ -73,25 +64,16 @@ export const AppointmentTable: React.FC<{
         startTime: product.startTime,
         endTime: product.endTime,
         paymentStatus: product.paymentStatus,
-        isPaired: product.isPaired, // Keep it as a boolean for conditional rendering
+        isPaired: product.isPaired,
         action: "action",
       }));
-
+     
       setTableData(mappedData);
-
-      const totalItems = leadResponseData.length;
-      setTotalPages(Math.max(1, Math.ceil(totalItems / 1)));
-
-      setTotalEntries(totalItems);
+      setTotalEntries(mappedData.length);
     }
   }, [leadResponseData]);
 
-  const handlePageChange = (newPage: number) => {
-    setCurrentPage(newPage);
-  };
-
-  const areColumnsAndDataReady =
-    fixedColumns.length > 0 && tableData.length > 0;
+  const areColumnsAndDataReady = fixedColumns.length > 0 && tableData.length > 0;
 
   return (
     <div>
@@ -101,15 +83,7 @@ export const AppointmentTable: React.FC<{
             <p>Data is Loading...</p>
           </div>
         ) : areColumnsAndDataReady ? (
-          <Table
-            columns={fixedColumns}
-            data={tableData}
-            showCheckboxes={true}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-            totalEntries={totalEntries}
-          />
+          <Table columns={fixedColumns} data={tableData} showCheckboxes={true} totalEntries={totalEntries} />
         ) : (
           <div className="flex justify-center items-center py-3">
             <p>No data available to display.</p>

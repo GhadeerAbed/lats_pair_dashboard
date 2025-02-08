@@ -25,7 +25,7 @@ const BlogForm: React.FC<{ id?: string }> = ({ id }) => {
   } = useForm<BlogFormData>();
 
   // Fetch blog data if `id` exists (for editing)
-  const { data } = useSWRHook(id ? API_SERVICES_URLS.GET_BLOG_ID(id) : null);
+  const { data } = useSWRHook(id ? API_SERVICES_URLS.GET_BLOG_ID(id) : "");
 
   // API hooks for creating and updating
   const { customTrigger, isMutating } = useSWRMutationHook(
@@ -33,7 +33,7 @@ const BlogForm: React.FC<{ id?: string }> = ({ id }) => {
     "POST"
   );
   const { customTrigger: updateTrigger, isMutating: isUpdateMutating } =
-    useSWRMutationHook(id ? API_SERVICES_URLS.UPDATE_BLOG(id) : null, "PATCH");
+    useSWRMutationHook(id ? API_SERVICES_URLS.UPDATE_BLOG(id) : "", "PATCH");
 
   const { customTrigger: imageTrigger, isMutating: isImageMutating } =
     useSWRMutationHook(API_SERVICES_URLS.CREATE_URL_IMAGE, "POST");

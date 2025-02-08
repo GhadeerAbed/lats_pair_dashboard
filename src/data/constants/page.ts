@@ -38,5 +38,7 @@ export const API_SERVICES_URLS = {
   APPOINTMENT_RESCHEDULE_PAIR:`/appointment/reschedule-pair`,
   APPOINTMENT_RESCHEDULE:(id: string) => `/appointment/reschedule/${id}`,
   CREATE_APPOINTMENT:'/appointment',
-  CREATE_PAIR_APPOINTMENT:'/appointment/pair-booking'
+  CREATE_PAIR_APPOINTMENT:'/appointment/pair-booking',
+
+  USERPREF:(id: string)=> `/users-prefs/user/${id}`
 };
