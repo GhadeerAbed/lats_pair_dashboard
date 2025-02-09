@@ -14,14 +14,13 @@ export const ShowAppointmentTable: React.FC<{ id?: any }> = ({ id }) => {
 
   const router = useRouter();
 
-  const { data: user } = useSWRHook(API_SERVICES_URLS.USERPREF(id));
-    const user_id = user?.id
+ 
 
   const API_SERVICES_URLS1 = {
     GET_APPOINTMENTS_LIST: (
       search: string,
     ) => {
-      let url = `/appointment/${user_id}`;
+      let url = `/appointment/${id}`;
       if (search) url += `&search=${encodeURIComponent(search)}`;
       if (isPaired) url += `&isPaired=${isPaired}`;
       return url;
@@ -37,7 +36,7 @@ export const ShowAppointmentTable: React.FC<{ id?: any }> = ({ id }) => {
 
   useEffect(() => {
     mutate();
-  }, [searchTerm, isPaired, id]); // ✅ Correct dependencies
+  }, [searchTerm, isPaired, mutate]); // ✅ Correct dependencies
 
   return (
     <div className="bg-white rounded-[15px] w-full p-4 my-10 shadow-md">
