@@ -20,7 +20,7 @@ export const ShowAppointmentTable: React.FC<{ id?: any }> = ({ id }) => {
     GET_APPOINTMENTS_LIST: (
       search: string,
     ) => {
-      let url = `/appointment/${id}`;
+      let url = `/appointment/userId=${id}`;
       if (search) url += `&search=${encodeURIComponent(search)}`;
       if (isPaired) url += `&isPaired=${isPaired}`;
       return url;

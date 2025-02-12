@@ -34,14 +34,14 @@ export const AddUserForm = () => {
       const res = await customTrigger(formattedData);
       if (res.status >= 400) {
         // Show error toast if status code is 400 or above
-        toast.error(res.message || "An error occurred while deleting the user.");
+        toast.error(res.message || "An error occurred while creating the user.");
       } else {
         // Show success toast for status codes below 400
         if (res.id) {
           localStorage.setItem("userId", res.id); // Save the ID in local storage
         }
-  
-        toast.success(res.message || "User deleted successfully!");
+        toast.success(res.message || "User created successfully!");
+        router.push(`/dashboard/users/${id}`)
       }
   
     } catch (error) {

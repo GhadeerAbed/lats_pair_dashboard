@@ -5,18 +5,21 @@ import { useSWRHook } from "@/hooks/page";
 import { UserTable } from "./components/page";
 import { Button, Search } from "@/components/page";
 import { useRouter } from "next/navigation";
-import FilterDropDown from "../Appointments/components/FilterDropDown/page";
+import FilterDropDown1 from "./components/FilterDropDown1/page";
+
 
 export const TableList: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [isPaired, setIsPaired] = useState<string>("");
+  const [isConsented, setIsConsented] = useState<string>("");
+  const [isEmailVerified, setIsEmailVerified] = useState<string>("");
   const router = useRouter();
   
   const API_SERVICES_URLS = {
     GET_Products_LIST: (search: string) => {
       let url = `/users?limit=100`;
       if (search) url += `&search=${encodeURIComponent(search)}`;
-      if (isPaired) url += `&isPaired=${isPaired}`;
+      if (isConsented) url += `&isConsented=${isConsented}`;
+      if (isEmailVerified) url += `&isEmailVerified=${isEmailVerified}`;
       return url;
     },
   };
@@ -42,7 +45,7 @@ export const TableList: React.FC = () => {
         <Button className="bg-primary text-white px-6 py-2" onClick={handleAddUser}>
           Add User
         </Button>
-        <FilterDropDown isPaired={isPaired} setIsPaired={setIsPaired} />
+        <FilterDropDown1 isConsented={isConsented} setIsConsented={setIsConsented} isEmailVerified={isEmailVerified} setIsEmailVerified={setIsEmailVerified}/>
       </div>
       <UserTable leadResponseData={leadResponseData} isLoadingLeads={isLoadingLeads} mutate={mutate} />
     </div>

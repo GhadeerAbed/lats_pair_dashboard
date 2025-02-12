@@ -84,7 +84,7 @@ export const ActionDropdown = ({
 
       {dropdownOpen && (
         <div
-          className=" absolute font-nunito  -ml-24 w-[140px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+          className=" absolute font-nunito  -ml-[120px] w-[140px] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"
