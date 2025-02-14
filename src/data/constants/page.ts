@@ -27,7 +27,7 @@ export const API_SERVICES_URLS = {
   CREATE_USER_PREF: `/users-prefs`,
   CREATE_BLOGS: `/blog`,
   CREATE_URL_IMAGE: `/users/image-upload`,
-  GET_BLOGS: `/blog`,
+  GET_BLOGS: `/blog?published=true`,
   UPDATE_BLOG: (id: string) => `/blog/${id}`,
   GET_BLOG_ID: (id: string) => `/blog/${id}`,
   GET_STATISTICS: `/users/stats`,
