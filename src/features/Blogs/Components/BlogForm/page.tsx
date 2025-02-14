@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Button, Checkbox, FileInput, Input } from "@/components/page";
 import { useSWRHook, useSWRMutationHook } from "@/hooks/page";
 import { API_SERVICES_URLS } from "@/data/page";
+import { toast } from "sonner";
 
 type BlogFormData = {
   title: string;
@@ -40,7 +41,6 @@ const BlogForm: React.FC<{ id?: string }> = ({ id }) => {
 
   const [coverImage, setCoverImage] = useState<File | null>(null);
 
-  // Populate form fields when editing a blog
   useEffect(() => {
     if (data) {
       setValue("title", data.title);
@@ -49,42 +49,76 @@ const BlogForm: React.FC<{ id?: string }> = ({ id }) => {
       setValue("slug", data.slug);
       setValue("category", data.category);
       setValue("summary", data.summary);
+      setValue("coverImage", data.coverImage); // Preserve existing coverImage URL
     }
   }, [data, setValue]);
 
   // Handle form submission (create or update)
+  // const onSubmit = async (formData: BlogFormData) => {
+  //   try {
+  //     let coverImageUrl = formData.coverImage || "";
+
+  //     // Upload new image if selected
+  //     if (coverImage) {
+  //       const formData = new FormData();
+  //       formData.append("photo", coverImage);
+
+  //       const imageResponse = await imageTrigger(formData);
+  //       coverImageUrl = imageResponse?.image_link || "";
+  //     }
+
+  //     const blogData = {
+  //       ...formData,
+  //       coverImage: coverImageUrl,
+  //     };
+
+  //     if (id) {
+  //       // Update existing blog
+  //       await updateTrigger(blogData);
+  //       toast.success("Blog updated successfully!");
+  //     } else {
+  //       // Create new blog
+  //       await customTrigger(blogData);
+  //       toast.success("Blog created successfully!");
+  //       reset();
+  //       setCoverImage(null);
+  //     }
+  //   } catch (error) {
+  //     toast.error("An error occurred. Please try again.");
+  //   }
+  // };
+
   const onSubmit = async (formData: BlogFormData) => {
     try {
-      let coverImageUrl = formData.coverImage || "";
+      let coverImageUrl = formData.coverImage || ""; // Keep existing cover image if no new image is selected
 
       // Upload new image if selected
-      if (coverImage) {
-        const formData = new FormData();
-        formData.append("photo", coverImage);
+      if (coverImage && coverImage instanceof File) {
+        const formDataImage = new FormData();
+        formDataImage.append("photo", coverImage);
 
-        const imageResponse = await imageTrigger(formData);
+        const imageResponse = await imageTrigger(formDataImage);
         coverImageUrl = imageResponse?.image_link || "";
       }
 
       const blogData = {
         ...formData,
-        coverImage: coverImageUrl,
+        coverImage: coverImageUrl, // Ensure this always gets included, whether updated or not
       };
 
       if (id) {
         // Update existing blog
         await updateTrigger(blogData);
-        alert("Blog updated successfully!");
+        toast.success("Blog updated successfully!");
       } else {
         // Create new blog
         await customTrigger(blogData);
-        alert("Blog created successfully!");
+        toast.success("Blog created successfully!");
         reset();
-        setCoverImage(null);
+        setCoverImage(null); // Reset cover image after successful creation
       }
     } catch (error) {
-      console.error("Blog submission failed:", error);
-      alert("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.");
     }
   };
 
@@ -99,7 +133,7 @@ const BlogForm: React.FC<{ id?: string }> = ({ id }) => {
 
       <FileInput
         onChange={(file) => setCoverImage(file)}
-        profileImage={data?.coverImage || null} // Show existing image if editing
+        profileImage={`${data?.coverImage}`}
       />
 
       <Input
@@ -115,7 +149,9 @@ const BlogForm: React.FC<{ id?: string }> = ({ id }) => {
         className="w-full p-2 border rounded-md"
         {...register("content", { required: "Content is required" })}
       />
-      {errors.content && <p className="text-red-500">{errors.content.message}</p>}
+      {errors.content && (
+        <p className="text-red-500">{errors.content.message}</p>
+      )}
 
       <Input
         label="Slug"
@@ -131,14 +167,18 @@ const BlogForm: React.FC<{ id?: string }> = ({ id }) => {
         type="text"
         {...register("category", { required: "Category is required" })}
       />
-      {errors.category && <p className="text-red-500">{errors.category.message}</p>}
+      {errors.category && (
+        <p className="text-red-500">{errors.category.message}</p>
+      )}
 
       <label className="block text-sm font-medium mb-1">Summary</label>
       <textarea
         className="w-full p-2 border rounded-md"
         {...register("summary", { required: "Summary is required" })}
       />
-      {errors.summary && <p className="text-red-500">{errors.summary.message}</p>}
+      {errors.summary && (
+        <p className="text-red-500">{errors.summary.message}</p>
+      )}
 
       <div className="flex items-center text-sm mt-2">
         <Checkbox {...register("published")} />

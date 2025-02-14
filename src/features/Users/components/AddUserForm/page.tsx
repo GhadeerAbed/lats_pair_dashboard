@@ -2,6 +2,7 @@
 import { Button, Checkbox, Input } from "@/components/page";
 import { API_SERVICES_URLS } from "@/data/page";
 import { useSWRMutationHook } from "@/hooks/page";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -17,6 +18,7 @@ export const AddUserForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const router = useRouter(); 
 
   const onSubmit = async (data: any) => {
     const formattedData = {
