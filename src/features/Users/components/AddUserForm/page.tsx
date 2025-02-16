@@ -47,7 +47,7 @@ export const AddUserForm = () => {
       }
   
     } catch (error) {
-      toast.error("Failed to create user. Please try again.");
+      console.log("Failed to create user. Please try again.");
     }
   };
 

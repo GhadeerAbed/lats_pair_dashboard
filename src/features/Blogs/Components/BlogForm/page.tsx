@@ -91,36 +91,54 @@ const BlogForm: React.FC<{ id?: string }> = ({ id }) => {
   const onSubmit = async (formData: BlogFormData) => {
     try {
       let coverImageUrl = formData.coverImage || ""; // Keep existing cover image if no new image is selected
-
+  
       // Upload new image if selected
       if (coverImage && coverImage instanceof File) {
         const formDataImage = new FormData();
         formDataImage.append("photo", coverImage);
-
+  
         const imageResponse = await imageTrigger(formDataImage);
+  
+        if (imageResponse?.status >= 400) {
+          throw new Error(imageResponse?.message || "Image upload failed");
+        }
+  
         coverImageUrl = imageResponse?.image_link || "";
       }
-
+  
       const blogData = {
         ...formData,
         coverImage: coverImageUrl, // Ensure this always gets included, whether updated or not
       };
-
+  
+      let response;
+  
       if (id) {
         // Update existing blog
-        await updateTrigger(blogData);
-        toast.success("Blog updated successfully!");
+        response = await updateTrigger(blogData);
       } else {
         // Create new blog
-        await customTrigger(blogData);
-        toast.success("Blog created successfully!");
+        response = await customTrigger(blogData);
+      }
+  
+      // Check for server errors
+      if (response?.status >= 400) {
+        throw new Error(response?.message || "An error occurred while saving the blog.");
+      }else{
+        toast.success(id ? "Blog updated successfully!" : "Blog created successfully!");
+      }
+  
+     
+  
+      if (!id) {
         reset();
         setCoverImage(null); // Reset cover image after successful creation
       }
-    } catch (error) {
-      toast.error("An error occurred. Please try again.");
+    } catch (error: any) {
+      toast.error(error.message || "An unexpected error occurred. Please try again.");
     }
   };
+  
 
   return (
     <form
