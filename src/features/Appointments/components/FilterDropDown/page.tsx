@@ -38,7 +38,7 @@ export const FilterDropDown = ({
   }
 
   return (
-    <div className="relative inline-block text-left z-50 " ref={dropdownRef}>
+    <div className="relative inline-block text-left z-10 " ref={dropdownRef}>
       <div>
         <button
           type="button"

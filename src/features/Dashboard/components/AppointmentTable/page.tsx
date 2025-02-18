@@ -13,6 +13,7 @@ export const AppointmentTable: React.FC<{
 }> = ({ leadResponseData, isLoadingLeads, mutate }) => {
   const [totalEntries, setTotalEntries] = useState(0);
   const [tableData, setTableData] = useState<TableProps[]>([]);
+  const [visibleCount, setVisibleCount] = useState(9); // Initially show 10 rows
 
   const fixedColumns: Column<TableProps>[] = [
     { id: "ID", Header: "ID", accessor: "ID" },
@@ -43,15 +44,9 @@ export const AppointmentTable: React.FC<{
       id: "action",
       Header: "Action",
       accessor: "action",
-      Cell: ({ row }) => {
-        return (
-          <ActionDropdown1
-            userId={row.original.userId}
-            id={row.original.ID}
-            mutate={mutate}
-          />
-        );
-      },
+      Cell: ({ row }) => (
+        <ActionDropdown1 userId={row.original.userId} id={row.original.ID} mutate={mutate} />
+      ),
     },
   ];
 
@@ -67,7 +62,7 @@ export const AppointmentTable: React.FC<{
         isPaired: product.isPaired,
         action: "action",
       }));
-     
+
       setTableData(mappedData);
       setTotalEntries(mappedData.length);
     }
@@ -83,7 +78,19 @@ export const AppointmentTable: React.FC<{
             <p>Data is Loading...</p>
           </div>
         ) : areColumnsAndDataReady ? (
-          <Table columns={fixedColumns} data={tableData} showCheckboxes={true} totalEntries={totalEntries} />
+          <>
+            <Table columns={fixedColumns} data={tableData.slice(0, visibleCount)} showCheckboxes={true} totalEntries={totalEntries} />
+            {visibleCount < tableData.length && (
+              <div className="flex justify-center mt-4">
+                <button
+                  onClick={() => setVisibleCount(tableData.length)}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md"
+                >
+                  See More
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <div className="flex justify-center items-center py-3">
             <p>No data available to display.</p>
